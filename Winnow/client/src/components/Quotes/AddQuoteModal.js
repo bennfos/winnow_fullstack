@@ -6,13 +6,13 @@ import { Icon, Button } from 'semantic-ui-react'
 class AddQuoteModal extends Component {
 
 //Defines initial state
-    state = {
-        quotes: [],
+    state = {        
         quoteText: "",
         quoteAuthor: "",   
         pageId: 0,
         quoteId: 0,      
-        modal: false
+        modal: false,
+        loadingStatus: false
     };
 
 

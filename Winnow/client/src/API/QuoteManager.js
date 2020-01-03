@@ -36,12 +36,12 @@ export default {
         })
         .then(response => response.json());
     },
-    postQuote(quoteObject) {
+    postQuote(newQuote) {
         const authHeader = createAuthHeaders();
         return fetch(`${baseUrl}/quotes`, {
             method: "POST",
             headers: authHeader,
-            body: JSON.stringify(quoteObject)
+            body: JSON.stringify(newQuote)
         }).then(response => response.json())
     },
     editQuote (id, editedQuote) {
