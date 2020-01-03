@@ -80,7 +80,7 @@ class BookCard extends Component {
                 .then(page => {
                     console.log("page response: ", page)
                     //THEN, if it does exist, set state with that page's info, and push user to that page's view
-                    if (page.id != 0) {
+                    if (page.id !== 0) {
                         this.navigateToPage(page)                                  
                         console.log("navigated to", page.month, page.day)
                     } else {                      

@@ -16,7 +16,7 @@ namespace Capstone.Models.DataModels
 
         public string QuoteAuthor { get; set; }
 
-        [Required]
+     
         public DateTime CreationDate { get; set; }
 
         [Required]

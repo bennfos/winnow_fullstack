@@ -175,30 +175,20 @@ class PageMain extends Component {
     }
 
     //Add quote and pageQuote to database (called in AddQuoteModal)
-    addQuote = (quoteObject, pageId) => {
+    addQuote = (newQuote, pageId) => {
+        console.log("newQuote in addQuote method: ", pageId, newQuote, )
         //post new quote object to the database
-        return QuoteManager.postQuote(quoteObject)
+        return QuoteManager.postQuote(newQuote)
             .then(quote => {
-                console.log("quote posted:", quote.quoteText)
-              //construct a new pageQuote object
-              const newPageQuote = {
-                quoteId: quote.id,
-                pageId: parseInt(pageId),
-                bookId: this.props.bookId
-              }
-              //post the new pageQuote to the database
-              QuoteManager.savePageQuote(newPageQuote)
-                .then(() => {
-                    console.log("new pageQuote created and posted")
-                  QuoteManager.getPageQuotes(pageId)
-                    .then(pageQuotes => {
-                      this.setState({
-                          pageQuotes: pageQuotes
-                      })
-
+                console.log("quote posted:", quote.quoteText)             
+              //post the new pageQuote to the database             
+                QuoteManager.getPageQuotes(pageId)
+                .then(quotes => {
+                    this.setState({
+                        quotes: quotes
+                })
               });
             });
-          });
         };
 
 

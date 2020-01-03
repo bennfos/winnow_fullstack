@@ -36,9 +36,9 @@ namespace Capstone.Routes.V1
             public const string QueryUserQuotes = Base + "/Quotes";
             public const string GetPageQuotes = Base + "/Quotes/{pageId}";
             public const string GetQuote = Base + "/Quotes/{id}";
-            public const string PostQuote = Base + "/Books";
-            public const string EditQuote = Base + "/Books/{id}";
-            public const string DeleteQuote = Base + "/Books/{id}";
+            public const string PostQuote = Base + "/Quotes";
+            public const string EditQuote = Base + "/Quotes/{id}";
+            public const string DeleteQuote = Base + "/Quotes/{id}";
         }
 
         public static class User

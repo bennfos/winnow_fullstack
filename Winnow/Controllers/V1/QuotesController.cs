@@ -87,10 +87,9 @@ namespace Capstone.Controllers.V1
 
             _context.Quotes.Add(newQuote);
             await _context.SaveChangesAsync();
+          
 
-            var foundQuote = _context.Quotes.Where(q => q.PageId == newQuote.PageId).OrderByDescending(q => q.Id).Take(1);
-
-            return Ok(foundQuote);
+            return newQuote;
         }
 
         // PUT: api/books/5

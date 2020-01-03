@@ -50,7 +50,7 @@ export default {
             method: "PUT",
             headers: authHeader,
             body: JSON.stringify(editedQuote)
-        }).then(response => response.json());
+        })
     },    
     deleteQuote(id) {
         const authHeader = createAuthHeaders();

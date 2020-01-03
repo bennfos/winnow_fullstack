@@ -8,9 +8,7 @@ class AddQuoteModal extends Component {
 //Defines initial state
     state = {        
         quoteText: "",
-        quoteAuthor: "",   
-        pageId: 0,
-        quoteId: 0,      
+        quoteAuthor: "",          
         modal: false,
         loadingStatus: false
     };
@@ -38,13 +36,15 @@ class AddQuoteModal extends Component {
         } else {
             this.setState({ loadingStatus: true });
 
+            console.log(this.props.pageId)
+            
         //creates a new object for the quote that is to be added,
             const newQuote = {
-                pageId: this.state.pageId,                      
+                pageId: this.props.pageId,                      
                 quoteText: this.state.quoteText,
                 quoteAuthor: this.state.quoteAuthor,         
             };
-
+            console.log(newQuote);
         //posts the object to the database, gets all pageQuotes, and rerenders (see PageMain)
             this.props.addQuote(newQuote, this.props.pageId)
 
