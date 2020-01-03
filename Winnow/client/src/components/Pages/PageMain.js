@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Sidebar, Menu } from 'semantic-ui-react'
-//import './PageMain.css'
+import '../Styles/Pages.css'
 import PageManager from '../../API/PageManager'
 import PageViews from './PageViews'
-//import QuoteDataManager from '../Quotes/QuoteDataManager'
-//import MonthSelect from '../MonthSelect/MonthSelect'
+import QuoteManager from '../../API/QuoteManager'
+import PageSelect from './PageSelect'
 import BookDataManager from '../../API/BookManager'
 
 
@@ -17,7 +17,7 @@ class PageMain extends Component {
         day: "",
         month: "",
         pageId: 0,
-        pages: [],
+        page: {},
         quotes: [],
         thought: "",
         monthOptions: ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
@@ -54,8 +54,80 @@ class PageMain extends Component {
         this.setState(stateToChange);       
     };
 
+    navigateToPage = (page) => {
+        this.setState({
+            page: page,
+            month: page.month,
+            day: page.day,
+            pageId: page.id,
+            thought: page.thought
+        })
+        this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
+        this.toggle()
+        this.toggleSidebar()
+    }
+
+    constructNewPage = () => {
+        const newPage = {           
+            bookId: this.props.bookId,
+            month: this.state.month,
+            day: this.state.day,
+            thought: ""
+        };
+        //post the page object to the database, THEN set state with that page's id, and push user to that page's view
+        PageManager.postPage(newPage)
+        .then(page => {
+            console.log("posted new page", page.id)
+            this.setState({
+                pageId: page.id
+            })
+        })
+        .then(() => {
+        //     //then get a random quote
+        //     if (this.state.isBlank === false) {
+        //         QuoteManager.getRandomQuote()
+
+        //     //then post quote for that page
+        //         .then(quote => {
+        //             console.log("got random quote:", quote.quoteText)
+        //             const initialQuote = {
+        //                 userId: parseInt(sessionStorage.getItem("credentials")),
+        //                 bookId: this.props.bookId,
+        //                 quoteText: quote.quoteText,
+        //                 quoteAuthor: quote.quoteAuthor,
+        //                 timestamp: new Date().toLocaleString()
+        //             };
+        //             QuoteManager.postQuote(initialQuote)
+        //                 .then(quote => {
+        //                 console.log("random quote posted:", quote.quoteText)
+        //             //construct a new pageQuote object
+        //                 const newPageQuote = {
+        //                     quoteId: quote.id,
+        //                     pageId: this.state.pageId,
+        //                     bookId: this.props.bookId
+        //                 }
+        //             //post the new pageQuote to the database
+        //                 QuoteManager.savePageQuote(newPageQuote)
+        //                     .then(()=> {
+        //                         console.log("pushing...")
+        //                         this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
+        //                         this.toggle()
+        //                         this.toggleSidebar()
+        //                     })
+        //                 })
+        //         })
+
+        // } else {
+            console.log("pushing...")
+            this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
+            this.toggle()
+            this.toggleSidebar()
+        // }
+    })
+    }
+
 //Construct or navigate to page (called in Month components)
-    constructOrNavigateToNewPage = () => {
+    handlePageSelect = () => {
     //Validates user input
         if (this.state.day === "") {
             alert("please select a day");
@@ -64,95 +136,29 @@ class PageMain extends Component {
 
         //check to see if the page already exists in the database
             PageManager.checkPages(this.props.bookId, this.state.month, this.state.day)
-                .then(pages => {
-
-                //THEN, if it does exist, set state with that page's info, and push user to that page's view
-                    if (pages.length > 0) {
-                        console.log("navigated to", pages[0].month, pages[0].day)
-                        this.setState({
-                            pages: pages,
-                            month: pages[0].month,
-                            day: pages[0].day,
-                            pageId: pages[0].id,
-                            thought: pages[0].thought
-                        })
-                        this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
-                        this.toggle()
-                        this.toggleSidebar()
-                    } else {
-
+                .then(page => {
+                    console.log("page response: ", page)
+                    //THEN, if it does exist, set state with that page's info, and push user to that page's view
+                    if (page != null) {
+                        this.navigateToPage(page)                                  
+                        console.log("navigated to", page.month, page.day)
+                    } else {                      
                     //else, if the page does not exist yet, construct an object for that page
-                        const newPage = {
-                            userId: parseInt(sessionStorage.getItem("credentials")),
-                            bookId: this.props.bookId,
-                            month: this.state.month,
-                            day: this.state.day,
-                            thought: ""
-                        };
-                        console.log("created page for", newPage.month, newPage.day)
-                        //post the page object to the database, THEN set state with that page's id, and push user to that page's view
-                        PageManager.postPage(newPage)
-                            .then(page => {
-                                console.log("posted new page", page.id)
-                                this.setState({
-                                    pageId: page.id
-                                })
-                            })
-                            .then(() => {
-                                //then get a random quote
-                                if (this.state.isBlank === false) {
-                                    QuoteDataManager.getRandomQuote()
-
-                                //then post quote for that page
-                                    .then(quote => {
-                                        console.log("got random quote:", quote.quoteText)
-                                        const initialQuote = {
-                                            userId: parseInt(sessionStorage.getItem("credentials")),
-                                            bookId: this.props.bookId,
-                                            quoteText: quote.quoteText,
-                                            quoteAuthor: quote.quoteAuthor,
-                                            timestamp: new Date().toLocaleString()
-                                        };
-                                        QuoteDataManager.postQuote(initialQuote)
-                                            .then(quote => {
-                                            console.log("random quote posted:", quote.quoteText)
-                                        //construct a new pageQuote object
-                                            const newPageQuote = {
-                                                quoteId: quote.id,
-                                                pageId: this.state.pageId,
-                                                bookId: this.props.bookId
-                                            }
-                                        //post the new pageQuote to the database
-                                            QuoteDataManager.savePageQuote(newPageQuote)
-                                                .then(()=> {
-                                                    console.log("pushing...")
-                                                    this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
-                                                    this.toggle()
-                                                    this.toggleSidebar()
-                                                })
-                                            })
-                                    })
-
-                            } else {
-                                console.log("pushing...")
-                                this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
-                                this.toggle()
-                                this.toggleSidebar()
-                            }
-                        })
-
+                        this.constructNewPage()                       
+                        console.log("created page for", page.month, page.day)                      
                     }
-            })
+                })
         }
+        
     }
 
 //update state with appropriate quotes whenever page is changed (called in componentDidUpdate in QuoteList)
     renderPageQuotes = (pageId) => {
     //get quotes for the page that is passed in as an argument, and set them in state
-        QuoteDataManager.getPageQuotes(pageId)
-          .then(pageQuotes => {
+        QuoteManager.getPageQuotes(pageId)
+          .then(quotes => {
             this.setState({
-                pageQuotes: pageQuotes,
+                quotes: quotes,
             })
           })
     }
@@ -171,7 +177,7 @@ class PageMain extends Component {
     //Add quote and pageQuote to database (called in AddQuoteModal)
     addQuote = (quoteObject, pageId) => {
         //post new quote object to the database
-        return QuoteDataManager.postQuote(quoteObject)
+        return QuoteManager.postQuote(quoteObject)
             .then(quote => {
                 console.log("quote posted:", quote.quoteText)
               //construct a new pageQuote object
@@ -181,10 +187,10 @@ class PageMain extends Component {
                 bookId: this.props.bookId
               }
               //post the new pageQuote to the database
-              QuoteDataManager.savePageQuote(newPageQuote)
+              QuoteManager.savePageQuote(newPageQuote)
                 .then(() => {
                     console.log("new pageQuote created and posted")
-                  QuoteDataManager.getPageQuotes(pageId)
+                  QuoteManager.getPageQuotes(pageId)
                     .then(pageQuotes => {
                       this.setState({
                           pageQuotes: pageQuotes
@@ -198,9 +204,9 @@ class PageMain extends Component {
 
 //put edited quote object in database, then get all page quotes for that page and set them in state (called in EditQuoteModal)
     putEditedQuote = (quoteObject, pageId) => {
-        return QuoteDataManager.editQuote(quoteObject)
+        return QuoteManager.editQuote(quoteObject)
             .then(() => {
-                QuoteDataManager.getPageQuotes(pageId)
+                QuoteManager.getPageQuotes(pageId)
                 .then(pageQuotes => {
                     this.setState({
                         pageQuotes: pageQuotes,
@@ -208,6 +214,20 @@ class PageMain extends Component {
                 })
             })
     }
+
+//delete quote from database, then get all pageQuotes and set them in state (called in QuoteCard)
+    removeQuote = (id, pageId) => {
+        QuoteManager.deleteQuote(id)
+            .then(() => {
+                QuoteManager.getPageQuotes(pageId)
+                    .then(pageQuotes => {
+                        this.setState({
+                            pageQuotes: pageQuotes,
+                        })
+
+                    })
+            })
+    };
 
 //put page object with edited thought in database, then get the page and set thought in state (called in AddThoughtModal)
     putThought = (pageObject, pageId) => {
@@ -223,19 +243,6 @@ class PageMain extends Component {
     }
 
 
-//delete quote from database, then get all pageQuotes and set them in state (called in QuoteCard)
-    removeQuote = (id, pageId) => {
-        QuoteDataManager.deleteQuote(id)
-            .then(() => {
-                QuoteDataManager.getPageQuotes(pageId)
-                    .then(pageQuotes => {
-                        this.setState({
-                            pageQuotes: pageQuotes,
-                        })
-
-                    })
-            })
-    };
 
 
     componentDidMount () {
@@ -282,13 +289,13 @@ class PageMain extends Component {
                     className="sidebar__menu"
                 >
                 {this.state.monthOptions.map(monthSelect => (
-                    <MonthSelect
+                    <PageSelect
                         key={monthSelect}
                         setMonth={this.setMonth}
                         toggleSidebar={this.toggleSidebar}
                         toggle={this.toggle}
                         handleFieldChange={this.handleFieldChange}
-                        constructOrNavigateToNewPage={this.constructOrNavigateToNewPage}
+                        handlePageSelect={this.handlePageSelect}
                         monthSelect={monthSelect}
                         {...this.props}
                     />
@@ -299,15 +306,15 @@ class PageMain extends Component {
             </div>
             <Sidebar.Pusher className="sidebar__pusher" dimmed={this.state.visible}>
                 <PageViews
-                putEditedQuote={this.putEditedQuote}
-                addQuote={this.addQuote}
-                removeQuote={this.removeQuote}
-                renderPageQuotes={this.renderPageQuotes}
-                putThought={this.putThought}
-                thought={this.state.thought}
-                pageQuotes={this.state.pageQuotes}
-                renderThought={this.renderThought}
-                {...this.props}
+                    thought={this.state.thought}
+                    putEditedQuote={this.putEditedQuote}
+                    addQuote={this.addQuote}
+                    removeQuote={this.removeQuote}               
+                    putThought={this.putThought}
+                    renderThought={this.renderThought}
+                    renderPageQuotes={this.renderPageQuotes}
+                    quotes={this.state.quotes}
+                    {...this.props}
                 />
             </Sidebar.Pusher>
             </Sidebar.Pushable>

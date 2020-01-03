@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.Data;
+using Capstone.Helpers;
+using Capstone.Models.DataModels;
 using Capstone.Routes.V1;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Controllers.V1
 {
@@ -21,51 +24,48 @@ namespace Capstone.Controllers.V1
        
         // GET: api/pages/5
         [HttpGet(Api.Pages.GetPage)]
-        public async Task<ActionResult<Page>> GetBook(int id)
+        public async Task<ActionResult<Page>> GetPage(int id)
         {
-            var book = await _context.Books.FindAsync(id);
+            var page = await _context.Pages.FindAsync(id);
 
-            if (book == null)
+            if (page == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return page;
         }
 
-        // POST: api/books
-        [HttpPost(Api.Books.PostBook)]
-        public async Task<ActionResult<Book>> PostBook(Book book)
+        // POST: api/pages
+        [HttpPost(Api.Pages.PostPage)]
+        public async Task<ActionResult<Page>> PostPage(Page page)
         {
-            Book newBook = new Book
+            Page newPage = new Page
             {
-                Title = book.Title,
-                Description = book.Description,
-                CreationDate = DateTime.Now,
-                StartsBlank = true,
-                UserId = HttpContext.GetUserId()
+                Month = page.Month,
+                Day = page.Day,
+                Thought = page.Thought,
+                BookId = page.BookId
             };
 
-            _context.Books.Add(newBook);
+            _context.Pages.Add(newPage);
             await _context.SaveChangesAsync();
 
-            var foundBook = _context.Books.Where(b => b.UserId == newBook.UserId).OrderByDescending(b => b.Id).Take(1);
+            var foundPage = _context.Pages.Where(p => p.BookId == newPage.BookId).OrderByDescending(p => p.Id).Take(1);
 
-            return Ok(foundBook);
+            return newPage;
         }
 
-        // PUT: api/books/5
-        [HttpPut(Api.Books.EditBook)]
-        public async Task<IActionResult> EditBook(int id, Book book)
+        // PUT: api/pages/5
+        [HttpPut(Api.Pages.EditPage)]
+        public async Task<IActionResult> EditPage(int id, Page page)
         {
-            if (id != book.Id)
+            if (id != page.Id)
             {
                 return BadRequest();
             }
-
-            var userId = HttpContext.GetUserId();
-            book.UserId = userId;
-            _context.Entry(book).State = EntityState.Modified;
+         
+            _context.Entry(page).State = EntityState.Modified;
 
             try
             {
@@ -73,7 +73,7 @@ namespace Capstone.Controllers.V1
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!PageExists(id))
                 {
                     return NotFound();
                 }
@@ -86,27 +86,30 @@ namespace Capstone.Controllers.V1
             return NoContent();
         }
 
-
-        // DELETE: api/books/5
-        [HttpDelete(Api.Books.DeleteBook)]
-        public async Task<ActionResult<Book>> DeleteBook(int id)
+        [HttpGet(Api.Pages.CheckForPage)]
+        public async Task<ActionResult<Page>> CheckForPage([FromQuery] int bookId, [FromQuery] string month, [FromQuery] string day) 
         {
-            var book = await _context.Books.FindAsync(id);
-            if (book == null)
+            var page = await _context.Pages.Where(p => p.BookId == bookId && p.Month == month && p.Day == day).FirstOrDefaultAsync();
+
+            if (page == null)
             {
-                return NotFound();
+                var emptyPage = new Page()
+                {
+                    Id = 0,
+                    Month = null,
+                    Day = null,
+                    BookId = 0
+                };
+                return emptyPage;       
             }
 
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
-
-            return book;
+            return page;
         }
 
         //Helpter methods
-        private bool BookExists(int id)
+        private bool PageExists(int id)
         {
-            return _context.Books.Any(b => b.Id == id);
+            return _context.Pages.Any(p => p.Id == id);
         }
     }
 }
