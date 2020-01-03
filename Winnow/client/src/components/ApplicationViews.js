@@ -28,28 +28,29 @@ export default class ApplicationViews extends Component {
           />
 
           <Route
-          exact path="/books" render={props => {
-              //if (this.isAuthenticated()) {
-              return <BookMain 
-                {...props}
-                onLogin={(user) => this.setState({ user })} 
-              />
-              //}
-              //return <Redirect to="/" />
-          }}
-          />
+            exact path="/books" render={props => {
+                if (this.isAuthenticated()) {
+                return <BookMain 
+                    {...props}
+                    onLogin={(user) => this.setState({ user })} 
+                />
+                }
+                return <Redirect to="/" />
+            }}
+          />            
 
-          {/* <Route
-          path="/books/:bookId(\d+)" render={props => {
-              //if (this.isAuthenticated()) {
-              return <Pages
-                  bookId={parseInt(props.match.params.bookId)}
-                  {...props}/>
-              //}
-              //return <Redirect to="/" />
-          }}
-          />
-
+            <Route
+            //NOT EXACT PATH  so that only pages include the month select top nav bar
+                path="/books/:bookId(\d+)" render={props => {
+                    if (this.isAuthenticated()) {
+                    return <PageMain
+                        bookId={parseInt(props.match.params.bookId)}
+                        {...props}/>
+                    }
+                    return <Redirect to="/" />
+                }}
+            />
+{/* 
           <Route
           exact path="/quote" render={props => {
               return <RandomQuote {...props} />
@@ -63,7 +64,7 @@ export default class ApplicationViews extends Component {
               //}
               //return <Redirect to="/" />
           }}
-          />  */}
+          />  */} */}
       
       </React.Fragment>
     );

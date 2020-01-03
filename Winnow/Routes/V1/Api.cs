@@ -20,6 +20,15 @@ namespace Capstone.Routes.V1
             public const string DeleteBook = Base + "/Books/{id}";
         }
 
+        public static class Pages
+        {
+            
+            public const string GetPage = Base + "/Pages/{id}";
+            public const string PostPage = Base + "/Pages";
+            public const string EditPage = Base + "/Books/{id}";
+            
+        }
+
         public static class User
         {
             public const string Login = Base + "/Auth/Login";
