@@ -23,41 +23,40 @@ namespace Capstone.Controllers.V1
 
         // GET: api/quotes
         [HttpGet(Api.Quotes.GetAllUserQuotes)]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetAllUserQuotes()
+        public async Task<ActionResult<IEnumerable<Quote>>> GetAllUserQuotes([FromQuery] int? pageId, [FromQuery] string search)
         {
             var userId = HttpContext.GetUserId();
+            if (pageId != null)
+            {
+                return await _context.Quotes
+               .Where(q => q.PageId == pageId)
+               .ToListAsync();
+            }
+
+            if (search != null)
+            {
+                return await _context.Quotes
+                    .Include(q => q.Page)
+                    .ThenInclude(p => p.Book)
+                    .Where(q => q.Page.Book.UserId == userId
+                        && q.QuoteAuthor.Contains(search)
+                        || q.QuoteText.Contains(search)
+                        || q.Page.Month.Contains(search)
+                        || q.Page.Thought.Contains(search))
+                    .OrderBy(q => q.Page.Month)
+                    .ThenBy(q => q.Page.Day).ToListAsync();
+            }
+
+
             return await _context.Quotes
                 .Include(q => q.Page)
                 .ThenInclude(p => p.Book)
-                .Where(q => q.Page.Book.UserId == userId)               
+                .Where(q => q.Page.Book.UserId == userId)
                 .OrderBy(q => q.Page.Month)
                 .ThenBy(q => q.Page.Day).ToListAsync();
-        }
+        } 
 
-        [HttpGet(Api.Quotes.QueryUserQuotes)]
-        public async Task<ActionResult<IEnumerable<Quote>>> QueryUserQuotes([FromQuery]string search)
-        {
-            var userId = HttpContext.GetUserId();
-            return await _context.Quotes
-                .Include(q => q.Page)
-                .ThenInclude(p => p.Book)
-                .Where(q => q.Page.Book.UserId == userId 
-                    && q.QuoteAuthor.Contains(search) 
-                    || q.QuoteText.Contains(search)
-                    || q.Page.Month.Contains(search)
-                    || q.Page.Thought.Contains(search))
-                .OrderBy(q => q.Page.Month)
-                .ThenBy(q => q.Page.Day).ToListAsync();
-        }
-
-        // GET: api/quotes
-        [HttpGet(Api.Quotes.GetPageQuotes)]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetPageQuotes(int pageId)
-        {
-            return await _context.Quotes
-                .Where(q => q.PageId == pageId)
-                .ToListAsync();
-        }
+       
 
         // GET: api/quotes/5
         [HttpGet(Api.Quotes.GetQuote)]

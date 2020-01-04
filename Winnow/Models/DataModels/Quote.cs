@@ -10,7 +10,7 @@ namespace Capstone.Models.DataModels
     {
         public int Id { get; set; }
 
-        [Required]
+       
         [MaxLength(1500)]
         public string QuoteText { get; set; }
 
@@ -19,7 +19,7 @@ namespace Capstone.Models.DataModels
      
         public DateTime CreationDate { get; set; }
 
-        [Required]
+       
         public int PageId { get; set; }
 
         public Page Page { get; set; }

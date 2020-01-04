@@ -53,8 +53,8 @@ class QuoteCard extends Component {
                     <div
                         className="quoteCard__content"
                     >
-                        <h3>{this.props.pageQuote.quote.quoteText}</h3>
-                        <h5>{this.props.pageQuote.quote.quoteAuthor}</h5>
+                        <h3>{this.props.quote.quoteText}</h3>
+                        <h5>{this.props.quote.quoteAuthor}</h5>
                     </div>
                     <Transition animation="horizontal flip" visible={this.state.visible}>
 

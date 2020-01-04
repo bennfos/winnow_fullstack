@@ -33,8 +33,6 @@ namespace Capstone.Routes.V1
         public static class Quotes
         {
             public const string GetAllUserQuotes = Base + "/Quotes";
-            public const string QueryUserQuotes = Base + "/Quotes";
-            public const string GetPageQuotes = Base + "/Quotes/{pageId}";
             public const string GetQuote = Base + "/Quotes/{id}";
             public const string PostQuote = Base + "/Quotes";
             public const string EditQuote = Base + "/Quotes/{id}";

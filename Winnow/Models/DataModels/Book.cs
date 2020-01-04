@@ -20,7 +20,7 @@ namespace Capstone.Models.DataModels
         [MaxLength(550)]
         public string Description { get; set; }
 
-        [Required]
+   
         [Display(Name = "Creation Date")]
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; } 

@@ -16,10 +16,10 @@ export default {
     },
     getPageQuotes(pageId) {
         const authHeader = createAuthHeaders();
-        return fetch(`${baseUrl}/quotes/${pageId}`, {
+        return fetch(`${baseUrl}/quotes?pageId=${pageId}`, {
             headers: authHeader
         })
-        .then(response => response.json());
+        .then(response => response.json());       
     },
     queryUserQuotes(searchInput) {
         const authHeader = createAuthHeaders();
@@ -39,8 +39,8 @@ export default {
     postQuote(newQuote) {
         const authHeader = createAuthHeaders();
         return fetch(`${baseUrl}/quotes`, {
-            method: "POST",
             headers: authHeader,
+            method: "POST",
             body: JSON.stringify(newQuote)
         }).then(response => response.json())
     },

@@ -155,6 +155,7 @@ class PageMain extends Component {
 //update state with appropriate quotes whenever page is changed (called in componentDidUpdate in QuoteList)
     renderPageQuotes = (pageId) => {
     //get quotes for the page that is passed in as an argument, and set them in state
+        console.log("pageId passed in to renderPageQuotes: ", pageId)
         QuoteManager.getPageQuotes(pageId)
           .then(quotes => {
             this.setState({

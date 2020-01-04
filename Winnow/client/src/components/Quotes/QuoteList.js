@@ -10,7 +10,9 @@ class QuoteList extends Component {
     state = {                 
         month: "",
         day: "",
+       
     }
+
 
 //when component mounts, update state of pageQuotes in PageMain
     componentDidMount() {   
@@ -56,6 +58,7 @@ class QuoteList extends Component {
                 <QuoteCard
                     key={quote.id}
                     quote={quote}
+                    pageId={this.props.pageId}
                     {...this.props}/>
               
               ))}
