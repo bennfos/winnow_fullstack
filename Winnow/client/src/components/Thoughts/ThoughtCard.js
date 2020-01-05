@@ -9,61 +9,60 @@ import ConfirmDeleteThoughtModal from './ConfirmDeleteThoughtModal'
 class ThoughtCard extends Component {
     state = {
         pages: [],
-        pageId: 0,
-        
+        pageId: 0,       
         thought: "",
         modal: false,
         loadingStatus: false,
     }
 
-//updates state of thought in PageMain to trigger render when ThoughtCard is mounted
-    componentDidMount() {
-        this.props.renderThought(this.props.pageId)
-        PageManager.getPage(this.props.pageId)
-            .then(page => {
-                this.setState({
-                    thought: page.thought,
-                    loadingStatus: false,
-                });
-            });
-        }
-
-//toggles modal
-toggle = () => {
-    this.setState(prevState => ({
-        modal: !prevState.modal
-    }));
-}
-
-
-//Sets state with input values as fields change
-handleFieldChange = evt => {
-    const stateToChange = {};
-    stateToChange[evt.target.id] = evt.target.value;
-    this.setState(stateToChange);
-};
-
-constructOrEditThought = event => {
-//Validates user input
-    if (this.state.thought === "") {
-        alert("please provide the thought text");
-    } else {
-        //construct a page object that includes the new or edited thought
+    
+    //toggles modal
+    toggle = () => {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
+    
+    
+    //Sets state with input values as fields change
+    handleFieldChange = evt => {
+        const stateToChange = {};
+        stateToChange[evt.target.id] = evt.target.value;
+        this.setState(stateToChange);
+    };
+    
+    constructOrEditThought = event => {
+        //Validates user input
+        if (this.state.thought === "") {
+            alert("please provide the thought text or cancel");
+        } else {
+            //construct a page object that includes the new or edited thought
             const pageWithThought = {
-                id: this.props.pageId,
-                userId: parseInt(sessionStorage.getItem("credentials")),
+                id: parseInt(this.props.pageId),               
                 bookId: this.props.bookId,
                 month: this.props.month,
                 day: this.props.day,
                 thought: this.state.thought
             }
-        //put the page object with new or edited thought in the database
-            this.props.putThought(pageWithThought, this.props.pageId)
+            //put the page record with new or edited thought in the database (see PageMain)
+            this.props.putThought(pageWithThought, pageWithThought.id)
         }
-    this.toggle()
-}
+        this.toggle()
+    }
+    
+    // renderThought updates state of thought in PageMain to trigger render when ThoughtCard is mounted
+        componentDidMount() {
+            this.props.renderThought(this.props.pageId)
+            //gets thought for that page into state so that it can be displayed in input field for user
+            PageManager.getPage(this.props.pageId)
+                .then(page => {
+                    this.setState({
+                        thought: page.thought,
+                        loadingStatus: false,
+                    });
+                });
+            }
 
-//gets thought for that page into state so that it can be displayed in input field for user
 
 //When component receives new pageId in props (i.e., page is changed) from PageMain, update state in PageMain to cause an update of state in this modal. Ensures correct value will populate in input field after page change.
 componentDidUpdate(prevProps) {
