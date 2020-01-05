@@ -221,16 +221,17 @@ class PageMain extends Component {
     };
 
 //put page object with edited thought in database, then get the page and set thought in state (called in AddThoughtModal)
-    putThought = (pageObject, pageId) => {
-        PageManager.editPage(pageObject)
+    putThought = (pageWithThought, pageId) => {
+        console.log(pageId, pageWithThought)
+        PageManager.editPage(pageId, pageWithThought)
             .then(()=> {
                 PageManager.getPage(pageId)
                 .then(page => {
                     this.setState({
                         thought: page.thought
                 })
-                })
             })
+        })
     }
 
 

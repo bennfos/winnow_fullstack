@@ -16,8 +16,8 @@ export default class PageViews extends Component {
             if (this.isAuthenticated()) {
               return <PageDay
                         className="pusher"
-                        pageId={props.match.params.pageId}
-                        bookId={props.match.params.bookId}
+                        pageId={parseInt(props.match.params.pageId)}
+                        bookId={parseInt(props.match.params.bookId)}
                         month={props.match.params.month}
                         day={props.match.params.day}
                         {...this.props}

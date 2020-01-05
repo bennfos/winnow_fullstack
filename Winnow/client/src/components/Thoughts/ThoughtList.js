@@ -8,8 +8,7 @@ import { Image } from 'semantic-ui-react'
 class ThoughtList extends Component {
   //Defines initial state
   state = {
-    thought: "",
-    userId: parseInt(sessionStorage.getItem("credentials"))
+    thought: ""
   };
 
 //When component receives new pageId in props (i.e., page is changed) from PageMain, update state in PageMain to cause a rerender of ThoughtList
