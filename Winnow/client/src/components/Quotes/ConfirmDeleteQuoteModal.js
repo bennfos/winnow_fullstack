@@ -6,6 +6,7 @@ class ConfirmDeleteQuoteModal extends Component {
 
 //Defines initial state
     state = {
+
             modal: false
         };
 
@@ -35,21 +36,21 @@ class ConfirmDeleteQuoteModal extends Component {
                         isOpen={this.state.modal}
                         toggle={this.toggle}
                     >
-                        <ModalHeader toggle={this.toggle}>confirm delete</ModalHeader>
+                        <ModalHeader toggle={this.toggle}>are you sure you want to delete this quote?</ModalHeader>
                         <ModalBody>
                             <div className="confirm__message">
-                                <h4>are you sure you want to delete this quote?</h4>
+                                <h4>{this.props.quote.quoteText}</h4>
+                                <p>{this.props.quote.quoteAuthor}</p>
                             </div>
                         </ModalBody>
                         <ModalFooter>
                             <Button
                                 negative
                                 onClick={()=>{
-                                    this.props.removeQuote(this.props.pageQuote.quote.id, this.props.pageId)
+                                    this.props.removeQuote(this.props.quote.id, this.props.pageId)
                                     this.toggle()
                                 }}>delete</Button>
                             <Button
-
                                 onClick={this.toggle}
                             >cancel</Button>
                         </ModalFooter>

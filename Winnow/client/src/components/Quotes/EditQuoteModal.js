@@ -7,11 +7,9 @@ import QuoteManager from '../../API/QuoteManager'
 class EditQuoteModal extends Component {
 
 //Defines initial state
-    state = {
-        quotes: [],
+    state = {      
         quoteText: "",
-        quoteAuthor: "",
-        timestamp: "",
+        quoteAuthor: "",       
         loadingStatus: false,
         modal: false
     };
@@ -45,8 +43,8 @@ class EditQuoteModal extends Component {
 
         //creates a new object for the edited news item,
             const editedQuote = {
-                id: this.props.pageQuote.quote.id,               
-                pageId: this.props.pageId,
+                id: this.props.quote.id,               
+                pageId: this.props.quote.pageId,
                 quoteText: this.state.quoteText,
                 quoteAuthor: this.state.quoteAuthor,              
             };
@@ -60,13 +58,11 @@ class EditQuoteModal extends Component {
 
 //Gets the quote that is being edited and sets state to populate the input fields
     componentDidMount() {
-        QuoteManager.getQuote(this.props.pageQuote.quote.id)
+        QuoteManager.getQuote(this.props.quote.id)
         .then(quote => {
             this.setState({
                 quoteText: quote.quoteText,
-                quoteAuthor: quote.quoteAuthor,
-                timestamp: this.props.pageQuote.quote.timestamp,
-                loadingStatus: false,
+                quoteAuthor: quote.quoteAuthor,                                       
             });
         });
     }
