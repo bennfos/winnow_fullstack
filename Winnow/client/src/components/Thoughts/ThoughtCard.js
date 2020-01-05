@@ -38,7 +38,7 @@ class ThoughtCard extends Component {
         } else {
             //construct a page object that includes the new or edited thought
             const pageWithThought = {
-                id: parseInt(this.props.pageId),               
+                id: this.props.pageId,               
                 bookId: this.props.bookId,
                 month: this.props.month,
                 day: this.props.day,
