@@ -135,11 +135,11 @@ class PageMain extends Component {
             this.setState({ loadingStatus: true });
 
         //check to see if the page already exists in the database
-            PageManager.checkPages(this.props.bookId, this.state.month, this.state.day)
+            PageManager.checkForPage(this.props.bookId, this.state.month, this.state.day)
                 .then(page => {
                     console.log("page response: ", page)
                     //THEN, if it does exist, set state with that page's info, and push user to that page's view
-                    if (page != null) {
+                    if (page.id !== 0) {
                         this.navigateToPage(page)                                  
                         console.log("navigated to", page.month, page.day)
                     } else {                      
