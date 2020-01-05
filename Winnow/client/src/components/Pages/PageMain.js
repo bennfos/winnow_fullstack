@@ -211,9 +211,9 @@ class PageMain extends Component {
         QuoteManager.deleteQuote(id)
             .then(() => {
                 QuoteManager.getPageQuotes(pageId)
-                    .then(pageQuotes => {
+                    .then(quotes => {
                         this.setState({
-                            pageQuotes: pageQuotes,
+                            quotes: quotes,
                         })
 
                     })
