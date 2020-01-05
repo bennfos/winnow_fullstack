@@ -190,17 +190,17 @@ class PageMain extends Component {
                 })
               });
             });
-        };
+    };
 
 
-//put edited quote object in database, then get all page quotes for that page and set them in state (called in EditQuoteModal)
-    putEditedQuote = (quoteObject, pageId) => {
-        return QuoteManager.editQuote(quoteObject)
+//put edited quote object in database, then get all quotes for that page and set them in state (called in EditQuoteModal)
+    putEditedQuote = (editedQuote, pageId) => {
+        return QuoteManager.editQuote(editedQuote.id, editedQuote)
             .then(() => {
                 QuoteManager.getPageQuotes(pageId)
-                .then(pageQuotes => {
+                .then(quotes => {
                     this.setState({
-                        pageQuotes: pageQuotes,
+                        quotes: quotes,
                     })
                 })
             })
