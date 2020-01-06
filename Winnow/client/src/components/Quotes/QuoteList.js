@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QuoteCard from './QuoteCard'
 import AddQuoteModal from './AddQuoteModal'
-//import AddRandomQuoteModal from './AddRandomQuoteModal'
+import AddRandomQuoteModal from './AddRandomQuoteModal'
 //import './Quotes.css'
 //import '../Pages/Pages.css'
 
@@ -37,11 +37,11 @@ class QuoteList extends Component {
           <div className="quoteList__contents">
             <div>
               <div className="pageDay__container">
-                {/* <div className="addRandomQuoteModal__container">
+                <div className="addRandomQuoteModal__container">
                   <AddRandomQuoteModal
                         {...this.props}
                   />
-                </div> */}
+                </div>
                 <div className="list__header">
                     <h1>{this.props.month} {this.props.day}</h1>
                     <div className="addQuoteModal">
