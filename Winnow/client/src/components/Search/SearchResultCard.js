@@ -4,10 +4,28 @@ import { Card, CardBody } from 'reactstrap'
 import { Button } from 'semantic-ui-react'
 //import '../Books/Card.css'
 
+
+
 class SearchResultCard extends Component {
-
-
-  render() {
+    state = {
+        thoughtString: ""
+    }
+    
+    componentDidMount() {
+        if (this.props.searchResult.page.thought.length > 0) {
+            this.setState({
+                thoughtString: this.props.searchResult.page.thought
+            })
+        }
+        if (this.props.searchResult.page.thought.length > 50) {
+            let slicedThoughtString = this.props.searchResult.page.thought.slice(0, 50)
+            this.setState({
+                thoughtString: `${slicedThoughtString}...`
+            })
+        }               
+    }
+    
+    render() {
     return (
         <>
             <div className="searchResult__card">
@@ -25,6 +43,7 @@ class SearchResultCard extends Component {
                         </div>
                         <h3>{this.props.searchResult.quoteText}</h3>
                         <h5>{this.props.searchResult.quoteAuthor}</h5>
+                        <p>{this.state.thoughtString}</p>
                         <div
                             className="goToPage"
                         >

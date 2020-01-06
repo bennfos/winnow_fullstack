@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Input, InputGroup } from 'reactstrap';
 import QuoteManager from '../../API/QuoteManager';
 import SearchResultCard from './SearchResultCard';
-//import './Search.css'
+import '../Styles/Search.css'
 
 
 class Search extends Component {
@@ -59,7 +59,7 @@ class Search extends Component {
                             onKeyUp={this.searchPageQuotes}
                             type="text"
                             id="searchInput"
-                            placeholder="search by text, author, or month"
+                            placeholder="search quotes, authors, months, or thoughts"
                             value={this.state.searchInput}
                             autoFocus>
                         </Input>
