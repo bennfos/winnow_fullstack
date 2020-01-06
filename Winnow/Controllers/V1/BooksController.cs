@@ -54,7 +54,7 @@ namespace Capstone.Controllers.V1
                 Title = book.Title,
                 Description = book.Description,
                 CreationDate = DateTime.Now,
-                StartsBlank = true,
+                StartsBlank = book.StartsBlank,
                 UserId = HttpContext.GetUserId()
             };
 

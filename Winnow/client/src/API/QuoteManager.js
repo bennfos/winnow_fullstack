@@ -7,7 +7,7 @@ export default {
 
 //All methods that fetch the quote data, with varying parameters and/or methods
 
-    getAllUserQuotes() {
+    getQuotes() {
         const authHeader = createAuthHeaders();
         return fetch(`${baseUrl}/quotes`, {
             headers: authHeader
@@ -20,15 +20,7 @@ export default {
             headers: authHeader
         })
         .then(response => response.json());       
-    },
-    queryUserQuotes(searchInput) {
-        const authHeader = createAuthHeaders();
-        return fetch(`${baseUrl}/quotes?search=${searchInput}`, {
-            headers: authHeader
-        })
-        .then(response => response.json());
-    },
-
+    },    
     getQuote(id) {
         const authHeader = createAuthHeaders();
         return fetch(`${baseUrl}/quotes/${id}`, {

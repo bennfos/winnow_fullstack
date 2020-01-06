@@ -20,6 +20,7 @@ class PageMain extends Component {
         page: {},
         quotes: [],
         thought: "",
+        startsBlank: false,       
         monthOptions: ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
         loadingStatus: false
     }
@@ -83,46 +84,33 @@ class PageMain extends Component {
             })
         })
         .then(() => {
-        //     //then get a random quote
-        //     if (this.state.isBlank === false) {
-        //         QuoteManager.getRandomQuote()
+            //then get a random quote
+            if (this.state.startsBlank === false) {
+                QuoteManager.getRandomQuote()
 
-        //     //then post quote for that page
-        //         .then(quote => {
-        //             console.log("got random quote:", quote.quoteText)
-        //             const initialQuote = {
-        //                 userId: parseInt(sessionStorage.getItem("credentials")),
-        //                 bookId: this.props.bookId,
-        //                 quoteText: quote.quoteText,
-        //                 quoteAuthor: quote.quoteAuthor,
-        //                 timestamp: new Date().toLocaleString()
-        //             };
-        //             QuoteManager.postQuote(initialQuote)
-        //                 .then(quote => {
-        //                 console.log("random quote posted:", quote.quoteText)
-        //             //construct a new pageQuote object
-        //                 const newPageQuote = {
-        //                     quoteId: quote.id,
-        //                     pageId: this.state.pageId,
-        //                     bookId: this.props.bookId
-        //                 }
-        //             //post the new pageQuote to the database
-        //                 QuoteManager.savePageQuote(newPageQuote)
-        //                     .then(()=> {
-        //                         console.log("pushing...")
-        //                         this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
-        //                         this.toggle()
-        //                         this.toggleSidebar()
-        //                     })
-        //                 })
-        //         })
+            //then post quote for that page
+                .then(quote => {
+                    console.log("got random quote:", quote.quoteText)
+                    const initialQuote = {                      
+                        pageId: this.state.pageId,
+                        quoteText: quote.quoteText,
+                        quoteAuthor: quote.quoteAuthor,
+                    };
+                    QuoteManager.postQuote(initialQuote)
+                        .then(quote => {
+                            console.log("random quote posted:", quote.quoteText)                  
+                            this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
+                            this.toggle()
+                            this.toggleSidebar()        
+                        })
+                })
 
-        // } else {
+        } else {
             console.log("pushing...")
             this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
             this.toggle()
             this.toggleSidebar()
-        // }
+         }
     })
     }
 
@@ -241,7 +229,7 @@ class PageMain extends Component {
         BookDataManager.getBook(this.props.bookId)
             .then(book => {
                 this.setState({
-                    isBlank: book.isBlank
+                    startsBlank: book.startsBlank
                 })
             })
     }

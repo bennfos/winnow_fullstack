@@ -44,28 +44,28 @@ class BookCard extends Component {
             })
         })
         .then(() => {
-        //     //then get a random quote
-        //     if (this.props.startsBlank === false) {
-        //         QuoteManager.getRandomQuote()
+            //then get a random quote
+            if (this.props.book.startsBlank === false) {
+                QuoteManager.getRandomQuote()
 
-        //     //then post quote for that page
-        //         .then(quote => {
-        //             console.log("got random quote:", quote.quoteText)
-        //             const initialQuote = {                     
-        //                 pageId: this.state.pageId,
-        //                 quoteText: quote.quoteText,
-        //                 quoteAuthor: quote.quoteAuthor,                       
-        //             };
-        //             QuoteManager.postQuote(initialQuote)
-        //                 .then(quote => {
-        //                 console.log("random quote posted:", quote.quoteText)
-        //                 this.props.history.push(`/books/${this.props.book.id}/${this.state.pageId}/${this.props.currentMonth}/${this.props.currentDate}`)                                        
-        //                 })                   
-        //         })
-        //     } else {
+            //then post quote for that page
+                .then(quote => {
+                    console.log("got random quote:", quote.quoteText)
+                    const initialQuote = {                     
+                        pageId: this.state.pageId,
+                        quoteText: quote.quoteText,
+                        quoteAuthor: quote.quoteAuthor,                       
+                    };
+                    QuoteManager.postQuote(initialQuote)
+                        .then(quote => {
+                        console.log("random quote posted:", quote.quoteText)
+                        this.props.history.push(`/books/${this.props.book.id}/${this.state.pageId}/${this.props.currentMonth}/${this.props.currentDate}`)                                        
+                        })                   
+                })
+            } else {
             console.log("pushing...")
             this.props.history.push(`/books/${this.props.book.id}/${this.state.pageId}/${this.props.currentMonth}/${this.props.currentDate}`)
-            // }
+             }
         })
     }
 

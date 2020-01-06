@@ -36,7 +36,7 @@ class Search extends Component {
     }
 
     componentDidMount () {
-        QuoteManager.getAllUserQuotes(this.state.searchInput)
+        QuoteManager.getQuotes(this.state.searchInput)
             .then(quotes => {
                 this.setState({
                     quotes: quotes,

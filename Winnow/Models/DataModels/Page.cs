@@ -24,7 +24,6 @@ namespace Capstone.Models.DataModels
         public int BookId { get; set; }
 
         public Book Book { get; set; }
-
-        
+       
     }
 }

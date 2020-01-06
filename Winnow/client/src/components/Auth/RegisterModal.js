@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
-//import BookDataManager from '../Books/BookDataManager'
+import BookManager from '../../API/BookManager'
 import { register } from '../../API/userManager';
 
 //import './Login.css';
@@ -33,19 +33,9 @@ class RegisterModal extends React.Component {
         })
         .then((user) => {
             this.props.onLogin(user);
-            this.toggle()
-            // const firstBookObject = {
-            //                  userId: user.id,
-            //                  title: "quotebook",
-            //                  description: "we have created a quotebook for you, with inspiration for each day of the year.",
-            //                  timestamp: new Date().toLocaleString(),
-            //                  isBlank: false
-            //              }
-            //              BookDataManager.postBook(firstBookObject)
-            //              .then(()=> {
-            //                  alert("welcome to winnow. please sign in.")
-            //                  
-            //              })
+            this.constructFirstBook();
+            this.toggle();
+            this.props.history.push('/books');
             })
             .catch(err => {
             this.setState({ errors: err.messages });
@@ -68,22 +58,15 @@ class RegisterModal extends React.Component {
     }
 
 
-    // createFirstBook = () => {
+    constructFirstBook = () => {
 
-    //     //create first book for user, and post, then close modal.
-    //         const firstBookObject = {
-    //             userId: ,
-    //             title: "quotebook",
-    //             description: "we have created a quotebook for you, with inspiration for each day of the year.",
-    //             timestamp: new Date().toLocaleString(),
-    //             isBlank: false
-    //         }
-    //         BookDataManager.postBook(firstBookObject)
-    //         .then(()=> {
-    //             alert("welcome to winnow. please sign in.")
-    //             this.toggle()
-    //         })
-    //     }
+        const firstBook = {                
+            title: "quotebook",
+            description: "we have created a quotebook for you, with inspiration for each day of the year.",                           
+            startsBlank: false
+        }
+        BookManager.postBook(firstBook)       
+    }
 
 
     render() {
