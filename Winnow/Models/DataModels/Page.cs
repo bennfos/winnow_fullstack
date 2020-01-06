@@ -25,6 +25,6 @@ namespace Capstone.Models.DataModels
 
         public Book Book { get; set; }
 
-        public ICollection<Quote> Quotes { get; set;}
+        
     }
 }

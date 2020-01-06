@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import Auth from './Auth/Auth'
 import getUser from '../API/userManager'
 import BookMain from './Books/BookMain'
-// import RandomQuote from './Quotes/RandomQuote'
+import RandomQuote from './Quotes/RandomQuote'
 import PageMain from './Pages/PageMain'
-// import Search from './Search/Search'
+import Search from './Search/Search'
 
 
 export default class ApplicationViews extends Component {
@@ -50,7 +50,7 @@ export default class ApplicationViews extends Component {
                     return <Redirect to="/" />
                 }}
             />
-{/* 
+
           <Route
           exact path="/quote" render={props => {
               return <RandomQuote {...props} />
@@ -64,7 +64,7 @@ export default class ApplicationViews extends Component {
               //}
               //return <Redirect to="/" />
           }}
-          />  */} 
+          /> 
       
       </React.Fragment>
     );

@@ -23,7 +23,7 @@ namespace Capstone.Controllers.V1
 
         // GET: api/quotes
         [HttpGet(Api.Quotes.GetAllUserQuotes)]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetAllUserQuotes([FromQuery] int? pageId, [FromQuery] string search)
+        public async Task<ActionResult<List<Quote>>> GetAllUserQuotes([FromQuery] int? pageId, [FromQuery] string search)
         {
             var userId = HttpContext.GetUserId();
             if (pageId != null)
@@ -33,27 +33,30 @@ namespace Capstone.Controllers.V1
                .ToListAsync();
             }
 
-            if (search != null)
-            {
-                return await _context.Quotes
-                    .Include(q => q.Page)
-                    .ThenInclude(p => p.Book)
-                    .Where(q => q.Page.Book.UserId == userId
-                        && q.QuoteAuthor.Contains(search)
-                        || q.QuoteText.Contains(search)
-                        || q.Page.Month.Contains(search)
-                        || q.Page.Thought.Contains(search))
-                    .OrderBy(q => q.Page.Month)
-                    .ThenBy(q => q.Page.Day).ToListAsync();
-            }
+            //if (search != null)
+            //{
+            //    var quotes = await _context.Quotes
+            //        .Include(q => q.Page)
+            //        .ThenInclude(p => p.Book)
+            //        .Where(q => q.Page.Book.UserId == userId
+            //            && q.QuoteAuthor.Contains(search)
+            //            || q.QuoteText.Contains(search)
+            //            || q.Page.Month.Contains(search)
+            //            || q.Page.Thought.Contains(search))
+            //        .OrderBy(q => q.Page.Month)
+            //        .ThenBy(q => q.Page.Day).ToListAsync();
 
+            //    return quotes;
+            //}
 
-            return await _context.Quotes
+           var quotes = await _context.Quotes
                 .Include(q => q.Page)
                 .ThenInclude(p => p.Book)
                 .Where(q => q.Page.Book.UserId == userId)
                 .OrderBy(q => q.Page.Month)
                 .ThenBy(q => q.Page.Day).ToListAsync();
+
+            return quotes;
         } 
 
        

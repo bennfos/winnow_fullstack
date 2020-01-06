@@ -1,4 +1,4 @@
-//import fetchJsonp from 'fetch-jsonp'
+import fetchJsonp from 'fetch-jsonp'
 import { createAuthHeaders } from '../API/userManager';
 
 const baseUrl = "/api/v1"
@@ -58,13 +58,12 @@ export default {
         {method: "DELETE",
         headers: authHeader,
         }).then(response => response.json())
+    },
+    getRandomQuote () {      
+        return fetchJsonp('http://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en',
+            {jsonpCallback: 'jsonp'})
+            .then(function(response) {
+            return response.json();
+        })
     }
-    //,
-    // getRandomQuote () {      
-    //     return fetchJsonp('http://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en',
-    //         {jsonpCallback: 'jsonp'})
-    //         .then(function(response) {
-    //         return response.json();
-    //     })
-    // }
 }

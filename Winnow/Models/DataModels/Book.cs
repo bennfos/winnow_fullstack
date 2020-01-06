@@ -33,7 +33,5 @@ namespace Capstone.Models.DataModels
 
         public ApplicationUser User { get; set; }
 
-        public ICollection<Page> Pages { get; set; }
-
     }
 }
