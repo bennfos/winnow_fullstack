@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Fade } from 'reactstrap'
 import { Button } from 'semantic-ui-react'
 import QuoteDataManager from '../../API/QuoteManager'
-//import './Quotes.css'
+import '../Styles/RandomQuote.css'
+
 
 
 
@@ -29,15 +30,16 @@ class RandomQuote extends Component {
         });
     }
 
-
     componentDidMount () {
-        document.body.classList.add('bk2')
         this.refreshRandomQuote()
-        }
+    }
 
     componentWillUnmount () {
-        document.body.classList.remove('bk2')
+        this.setState({
+            fadeIn: false
+        })
     }
+
 
     render() {
        return (
@@ -56,14 +58,16 @@ class RandomQuote extends Component {
                             }
                         ></Button>
                 </div>
-                <div>
-                    <Fade in={this.state.fadeIn} tag='h3' timeout={600}>
-                        {this.state.quoteText}
-                    </Fade>
-                    <Fade in={this.state.fadeIn} tag='h5' timeout={600}>
+
+                <Fade in={this.state.fadeIn} tag='h3' timeout={600}>
+                    {this.state.quoteText}
+                </Fade>
+                <div className="author">
+                    <Fade in={this.state.fadeIn}  tag='h5' timeout={600}>
                         {this.state.quoteAuthor}
                     </Fade>
                 </div>
+
             </div>
         </>
        )}

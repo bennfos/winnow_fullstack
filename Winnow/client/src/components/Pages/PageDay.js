@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import QuoteList from '../Quotes/QuoteList'
 import ThoughtList from '../Thoughts/ThoughtList'
+import { Fade } from 'reactstrap'
+import { Image } from 'semantic-ui-react'
 import '../Styles/Pages.css'
+
 
 
 class PageDay extends Component {
@@ -9,19 +12,30 @@ class PageDay extends Component {
         quotes: [],
         pages: [],
         thought: "",
+        fadeIn: true
       };
 
 
     render() {
         return (
             <React.Fragment>
+
                 <div className="quoteList__container">
-                    <QuoteList
-                        {...this.props}
-                    />
-                    <ThoughtList
-                        {...this.props}
-                    />
+                <Fade in={this.state.fadeIn} timeout={600}>
+                    <div>
+                        <QuoteList
+                            {...this.props}
+                        />
+                    </div>
+                </Fade>
+                <Fade in={this.state.fadeIn} timeout={600}>
+                    <div className="thoughtList">
+
+                        <ThoughtList
+                            {...this.props}
+                        />
+                    </div>
+                </Fade>
                 </div>
             </React.Fragment>
         )

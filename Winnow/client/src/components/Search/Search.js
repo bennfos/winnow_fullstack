@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Input, InputGroup } from 'reactstrap';
+import { Input, InputGroup, Fade } from 'reactstrap';
+import { Image } from 'semantic-ui-react'
 import QuoteManager from '../../API/QuoteManager';
 import SearchResultCard from './SearchResultCard';
 import '../Styles/Search.css'
+import logo from '../../agronomy.png'
 
 
 class Search extends Component {
@@ -12,7 +14,8 @@ class Search extends Component {
             searchInput: "",
             searchResults: [],
             initialMessage: "",
-            loadingStatus: true
+            loadingStatus: true,
+            fadeIn: true
         }
 
 
@@ -22,16 +25,16 @@ class Search extends Component {
         this.setState(stateToChange);
     }
 
-    searchPageQuotes = () => {           
+    searchPageQuotes = () => {
         //4. Filter the quotes to include only those object whose quoteText, quoteAuthor or month include the search input value
-        this.setState({initialMessage: ""})    
+        this.setState({initialMessage: ""})
         const searchResults = this.state.quotes.filter(quote =>
                 quote.quoteText.toLowerCase().includes(this.state.searchInput.toLowerCase())
                 || quote.quoteAuthor.toLowerCase().includes(this.state.searchInput.toLowerCase())
                 || quote.page.month.toLowerCase().includes(this.state.searchInput.toLowerCase())
                 || quote.page.thought.toLowerCase().includes(this.state.searchInput.toLowerCase()))
                 if (this.state.loadingStatus == false ) {
-                    this.setState({ searchResults: searchResults})   
+                    this.setState({ searchResults: searchResults})
                 }
     }
 
@@ -41,11 +44,11 @@ class Search extends Component {
                 this.setState({
                     quotes: quotes,
                     initialMessage: "search and you shall find",
-                    loadingStatus: false                
-                })           
+                    loadingStatus: false
+                })
             })
         }
-    
+
 
 
     render() {
@@ -67,13 +70,18 @@ class Search extends Component {
                     </div>
                     <div className="results__container">
                         {this.state.searchResults.map(searchResult => (
-                    <SearchResultCard
-                      key={searchResult.id}
-                      searchResult={searchResult}
-                      {...this.props}/>
-                  ))}
-                  {this.state.initialMessage}
-                  </div>
+                        <SearchResultCard
+                            key={searchResult.id}
+                            searchResult={searchResult}
+                            {...this.props}/>
+                        ))}
+                            <div className="initialMessage">
+                                <Image className="logo" src={logo}></Image>
+                                <Fade in={this.state.fadeIn} timeout={800}>
+                                    <h2>{this.state.initialMessage}</h2>
+                                </Fade>
+                            </div>
+                    </div>
                 </div>
             </React.Fragment>
         )

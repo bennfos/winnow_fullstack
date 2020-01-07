@@ -10,7 +10,7 @@ class SearchResultCard extends Component {
     state = {
         thoughtString: ""
     }
-    
+
     componentDidMount() {
         if (this.props.searchResult.page.thought.length > 0) {
             this.setState({
@@ -22,18 +22,18 @@ class SearchResultCard extends Component {
             this.setState({
                 thoughtString: `${slicedThoughtString}...`
             })
-        }               
+        }
     }
-    
+
     render() {
     return (
         <>
-            <div className="searchResult__card">
+            <div className="resultCard">
                 <Card className="card__container">
 
                     <CardBody >
-                        <div className="searchResult__card__header">
-                            <h2>{this.props.searchResult.page.month} {this.props.searchResult.page.day}</h2>
+                        <div className="resultCard__header">
+                            <h2 className="date">{this.props.searchResult.page.month} {this.props.searchResult.page.day}</h2>
                             <Button
                                 as={Link}
                                 to={`/books/${this.props.searchResult.page.bookId}/${this.props.searchResult.pageId}/${this.props.searchResult.page.month}/${this.props.searchResult.page.day}`}
@@ -41,13 +41,10 @@ class SearchResultCard extends Component {
                                 size="mini"                           >
                             </Button>
                         </div>
-                        <h3>{this.props.searchResult.quoteText}</h3>
-                        <h5>{this.props.searchResult.quoteAuthor}</h5>
-                        <p>{this.state.thoughtString}</p>
-                        <div
-                            className="goToPage"
-                        >
-
+                        <div className="resultCard__body">
+                            <h4>{this.props.searchResult.quoteText}</h4>
+                            <h5 className="author">{this.props.searchResult.quoteAuthor}</h5>
+                            <p>{this.state.thoughtString}</p>
                         </div>
                     </CardBody>
                 </Card>

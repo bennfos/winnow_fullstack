@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BookCard from "./BookCard";
 import BookManager from "../../API/BookManager";
 import AddBookModal from "./AddBookModal";
-//import '../Styles/BookList.css'
+import '../Styles/Books.css'
 import { getUser } from "../../API/userManager";
 
 
@@ -11,7 +11,7 @@ class BookList extends Component {
   //Defines initial state
   state = {
     books: [],
-    description: "",   
+    description: "",
     months: ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
     currentMonth: "",
     currentDate: "",
@@ -81,7 +81,14 @@ class BookList extends Component {
         <div className="bookList__container">
 
               <div className="bookList__header">
-                <h1>my books</h1>
+                <h1>books</h1>
+                <div className="addBookModal">
+                  <AddBookModal
+
+                    {...this.props}
+                    addBook={this.addBook}
+                  />
+                </div>
               </div>
 
               <div className="bookList__contents">
@@ -101,11 +108,7 @@ class BookList extends Component {
                   )
                 })}
 
-                  <AddBookModal
 
-                    {...this.props}
-                    addBook={this.addBook}
-                  />
 
               </div>
 

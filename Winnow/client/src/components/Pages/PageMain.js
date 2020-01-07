@@ -12,7 +12,7 @@ import BookDataManager from '../../API/BookManager'
 class PageMain extends Component {
 
     state = {
-        visible: false,       
+        visible: false,
         modal: false,
         day: "",
         month: "",
@@ -20,7 +20,7 @@ class PageMain extends Component {
         page: {},
         quotes: [],
         thought: "",
-        startsBlank: false,       
+        startsBlank: false,
         monthOptions: ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"],
         loadingStatus: false
     }
@@ -52,7 +52,7 @@ class PageMain extends Component {
     handleFieldChange = evt => {
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
-        this.setState(stateToChange);       
+        this.setState(stateToChange);
     };
 
     navigateToPage = (page) => {
@@ -69,7 +69,7 @@ class PageMain extends Component {
     }
 
     constructNewPage = () => {
-        const newPage = {           
+        const newPage = {
             bookId: this.props.bookId,
             month: this.state.month,
             day: this.state.day,
@@ -91,17 +91,17 @@ class PageMain extends Component {
             //then post quote for that page
                 .then(quote => {
                     console.log("got random quote:", quote.quoteText)
-                    const initialQuote = {                      
+                    const initialQuote = {
                         pageId: this.state.pageId,
                         quoteText: quote.quoteText,
                         quoteAuthor: quote.quoteAuthor,
                     };
                     QuoteManager.postQuote(initialQuote)
                         .then(quote => {
-                            console.log("random quote posted:", quote.quoteText)                  
+                            console.log("random quote posted:", quote.quoteText)
                             this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
                             this.toggle()
-                            this.toggleSidebar()        
+                            this.toggleSidebar()
                         })
                 })
 
@@ -125,19 +125,17 @@ class PageMain extends Component {
         //check to see if the page already exists in the database
             PageManager.checkForPage(this.props.bookId, this.state.month, this.state.day)
                 .then(page => {
-                    console.log("page response: ", page)
+
                     //THEN, if it does exist, set state with that page's info, and push user to that page's view
                     if (page.id !== 0) {
-                        this.navigateToPage(page)                                  
-                        console.log("navigated to", page.month, page.day)
-                    } else {                      
+                        this.navigateToPage(page)
+                    } else {
                     //else, if the page does not exist yet, construct an object for that page
-                        this.constructNewPage()                       
-                        console.log("created page for", page.month, page.day)                      
+                        this.constructNewPage()
                     }
                 })
         }
-        
+
     }
 
 //update state with appropriate quotes whenever page is changed (called in componentDidUpdate in QuoteList)
@@ -169,8 +167,8 @@ class PageMain extends Component {
         //post new quote object to the database
         return QuoteManager.postQuote(newQuote)
             .then(quote => {
-                console.log("quote posted:", quote.quoteText)             
-              //post the new pageQuote to the database             
+                console.log("quote posted:", quote.quoteText)
+              //post the new pageQuote to the database
                 QuoteManager.getPageQuotes(pageId)
                 .then(quotes => {
                     this.setState({
@@ -289,7 +287,7 @@ class PageMain extends Component {
                     thought={this.state.thought}
                     putEditedQuote={this.putEditedQuote}
                     addQuote={this.addQuote}
-                    removeQuote={this.removeQuote}               
+                    removeQuote={this.removeQuote}
                     putThought={this.putThought}
                     renderThought={this.renderThought}
                     renderPageQuotes={this.renderPageQuotes}

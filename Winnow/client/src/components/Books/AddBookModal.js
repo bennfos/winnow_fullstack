@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import { Icon, Button } from 'semantic-ui-react'
 import { getUser } from '../../API/userManager';
-//import '../Books/Card.css'
+import '../Styles/Books.css'
 
 class AddBookModal extends Component {
 
@@ -27,7 +27,7 @@ class AddBookModal extends Component {
     handleFieldChange = evt => {
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
-        this.setState(stateToChange);       
+        this.setState(stateToChange);
     };
 
     constructNewBook = () => {
@@ -40,8 +40,8 @@ class AddBookModal extends Component {
 
         //creates a new object for the edited news item,
             const newBook = {
-                title: this.state.title,              
-                description: this.state.description,               
+                title: this.state.title,
+                description: this.state.description,
                 startsBlank: true
             };
 
@@ -63,7 +63,7 @@ class AddBookModal extends Component {
     render(){
         return(
             <>
-                <div className="addCard" onClick={() => this.toggle()}>
+                <div onClick={() => this.toggle()}>
                     <div className="addCard__content">
                         <div
                             className="add__icon"
@@ -73,7 +73,7 @@ class AddBookModal extends Component {
                                 onClick={() => this.toggle}
                                 className="addBookModal__button"
                                 name="add"
-                                size="large">
+                                >
                             </Icon>
                         </div>
                     </div>

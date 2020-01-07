@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import ThoughtCard from "./ThoughtCard";
 import { Image } from 'semantic-ui-react'
-//import './Thoughts.css'
-//import logo from '../Auth/agronomy.png'
+import '../Styles/Pages.css'
+import logo from '../../agronomy.png'
 
 
 class ThoughtList extends Component {
   //Defines initial state
   state = {
-    thought: ""
+    thought: "",
+    hide: true
   };
+
+
 
 //When component receives new pageId in props (i.e., page is changed) from PageMain, update state in PageMain to cause a rerender of ThoughtList
     componentDidUpdate(prevProps) {
@@ -27,9 +30,6 @@ class ThoughtList extends Component {
     return (
       <React.Fragment>
         <div className="thoughtList__contents">
-          <div className="thoughtImage">
-          {/* <Image className="logo" src={logo}></Image> */}
-          </div>
           <div className="thoughtCard__container">
               <ThoughtCard
                 {...this.props}

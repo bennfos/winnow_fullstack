@@ -3,19 +3,19 @@ import QuoteCard from './QuoteCard'
 import AddQuoteModal from './AddQuoteModal'
 import AddRandomQuoteModal from './AddRandomQuoteModal'
 //import './Quotes.css'
-//import '../Pages/Pages.css'
+import '../Styles/Pages.css'
 
 
 class QuoteList extends Component {
-    state = {                 
+    state = {
         month: "",
         day: "",
-       
+
     }
 
 
 //when component mounts, update state of pageQuotes in PageMain
-    componentDidMount() {   
+    componentDidMount() {
       this.props.renderPageQuotes(this.props.pageId)
       }
 
@@ -35,24 +35,24 @@ class QuoteList extends Component {
           <React.Fragment>
 
           <div className="quoteList__contents">
-            <div>
-              <div className="pageDay__container">
+
+
                 <div className="addRandomQuoteModal__container">
                   <AddRandomQuoteModal
                         {...this.props}
                   />
                 </div>
-                <div className="list__header">
+                <div className="quoteList__header">
                     <h1>{this.props.month} {this.props.day}</h1>
                     <div className="addQuoteModal">
                       <AddQuoteModal
                           {...this.props}/>
                     </div>
                 </div>
-              </div>
-            </div>
 
-            <div>
+
+
+            <div className="quoteCard">
               {this.props.quotes.map(quote => (
 
                 <QuoteCard
@@ -60,7 +60,7 @@ class QuoteList extends Component {
                     quote={quote}
                     pageId={this.props.pageId}
                     {...this.props}/>
-              
+
               ))}
             </div>
 

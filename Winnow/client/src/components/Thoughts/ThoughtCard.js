@@ -3,34 +3,35 @@ import { Card, CardTitle, Modal, ModalBody, ModalFooter, ModalHeader, Input} fro
 import { Button } from 'semantic-ui-react'
 import PageManager from '../../API/PageManager'
 import ConfirmDeleteThoughtModal from './ConfirmDeleteThoughtModal'
-//import '../Books/Card.css'
-//import './Thoughts.css'
+import { Image } from 'semantic-ui-react'
+import logo from '../../agronomy.png'
 
 class ThoughtCard extends Component {
     state = {
         pages: [],
-        pageId: 0,       
+        pageId: 0,
         thought: "",
         modal: false,
         loadingStatus: false,
+        className: "hide"
     }
 
-    
+
     //toggles modal
     toggle = () => {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
     }
-    
-    
+
+
     //Sets state with input values as fields change
     handleFieldChange = evt => {
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
         this.setState(stateToChange);
     };
-    
+
     constructOrEditThought = event => {
         //Validates user input
         if (this.state.thought === "") {
@@ -38,7 +39,7 @@ class ThoughtCard extends Component {
         } else {
             //construct a page object that includes the new or edited thought
             const pageWithThought = {
-                id: this.props.pageId,               
+                id: this.props.pageId,
                 bookId: this.props.bookId,
                 month: this.props.month,
                 day: this.props.day,
@@ -49,7 +50,7 @@ class ThoughtCard extends Component {
         }
         this.toggle()
     }
-    
+
     // renderThought updates state of thought in PageMain to trigger render when ThoughtCard is mounted
         componentDidMount() {
             this.props.renderThought(this.props.pageId)
@@ -61,7 +62,12 @@ class ThoughtCard extends Component {
                         loadingStatus: false,
                     });
                 });
-            }
+            setTimeout(() => {
+                this.setState({
+                    className: "thoughtCard"
+                })
+            }, 2400)
+        }
 
 
 //When component receives new pageId in props (i.e., page is changed) from PageMain, update state in PageMain to cause an update of state in this modal. Ensures correct value will populate in input field after page change.
@@ -88,10 +94,11 @@ resetThoughtInStateIfNoThoughtInProps = () => {
   render() {
     return (
 
-        <div>
+        <div className={this.state.className}>
+            <Image className="logo" src={logo}></Image>
             <Card
+                className="thoughtCard--background"
                 body
-                className="thoughtCard"
                 onClick={()=> {
                     this.toggle()
                     this.resetThoughtInStateIfNoThoughtInProps()

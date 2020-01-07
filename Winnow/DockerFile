@@ -1,0 +1,10 @@
+﻿using System;
+namespace Capstone
+{
+    public class DockerFile
+    {
+        public DockerFile()
+        {
+        }
+    }
+}

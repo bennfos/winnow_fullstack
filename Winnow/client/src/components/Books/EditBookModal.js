@@ -13,7 +13,7 @@ class BookEditModal extends Component {
         creationDate: "",
         loadingStatus: false,
         modal: false
-    };  
+    };
 
 //Displays/hides the edit modal
     toggle = () => {
@@ -39,9 +39,9 @@ class BookEditModal extends Component {
 
         //creates a new object for the edited book
             const editedBook = {
-                id: this.props.book.id,               
+                id: this.props.book.id,
                 title: this.state.title,
-                description: this.state.description,              
+                description: this.state.description,
             };
         //puts the object to the database
             this.props.putEditedBook(editedBook)
@@ -59,7 +59,7 @@ class BookEditModal extends Component {
             title: book.title,
             description: book.description,
             creationDate: book.creationDate,
-            startsBlank: book.startsBlank           
+            startsBlank: book.startsBlank
             });
         });
     }
@@ -67,15 +67,15 @@ class BookEditModal extends Component {
     render(){
         return(
             <>
-                <section className="bookSectionContent">
+
                 <Icon
-                    type="button"
+
                     onClick={this.toggle}
                     name='edit outline'
                     size="large"
                 >
                 </Icon>
-                </section>
+
                 <div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}
                 className={this.props.className}
