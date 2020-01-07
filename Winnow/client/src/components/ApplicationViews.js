@@ -1,7 +1,6 @@
-import { Route, Router, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import Auth from './Auth/Auth'
-import getUser from '../API/userManager'
 import BookMain from './Books/BookMain'
 import RandomQuote from './Quotes/RandomQuote'
 import PageMain from './Pages/PageMain'
@@ -10,18 +9,18 @@ import Search from './Search/Search'
 
 export default class ApplicationViews extends Component {
   isAuthenticated = () => localStorage.getItem("user") !== null;
- 
+
 
 
   render() {
     return (
       <React.Fragment>
-       
+
           <Route
           exact path="/"
           render={props => {
-              return <Auth 
-                {...props} 
+              return <Auth
+                {...props}
                 onLogin={(user) => this.setState({ user })}
               />;
           }}
@@ -30,14 +29,14 @@ export default class ApplicationViews extends Component {
           <Route
             exact path="/books" render={props => {
                 if (this.isAuthenticated()) {
-                return <BookMain 
+                return <BookMain
                     {...props}
-                    onLogin={(user) => this.setState({ user })} 
+                    onLogin={(user) => this.setState({ user })}
                 />
                 }
                 return <Redirect to="/" />
             }}
-          />            
+          />
 
             <Route
             //NOT EXACT PATH  so that only pages include the month select top nav bar
@@ -64,8 +63,8 @@ export default class ApplicationViews extends Component {
               //}
               //return <Redirect to="/" />
           }}
-          /> 
-      
+          />
+
       </React.Fragment>
     );
   }
