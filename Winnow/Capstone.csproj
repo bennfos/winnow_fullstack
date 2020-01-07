@@ -31,4 +31,10 @@
     <Compile Remove="Migrations\20191022035431_Initial.cs" />
     <Compile Remove="Migrations\20191022035431_Initial.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="DockerFile.cs" />
+    <None Remove="DockerFile.txt" />
+    <None Remove="DockerFile" />
+    <None Remove="Dockerfile" />
+  </ItemGroup>
 </Project>
