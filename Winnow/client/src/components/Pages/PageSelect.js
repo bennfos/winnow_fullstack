@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Label, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import { Menu, Button, Grid, Container } from 'semantic-ui-react';
-//import '../Books/Card.css'
+import '../Styles/Pages.css'
 
 
 
@@ -19,7 +19,7 @@ class PageSelect extends Component {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
-    }   
+    }
 
     pushDaysOfMonth = () => {
         const monthSelected = this.props.monthSelect

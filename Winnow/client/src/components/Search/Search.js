@@ -15,7 +15,6 @@ class Search extends Component {
             searchResults: [],
             initialMessage: "",
             loadingStatus: true,
-            fadeIn: true
         }
 
 
@@ -77,9 +76,9 @@ class Search extends Component {
                         ))}
                             <div className="initialMessage">
                                 <Image className="logo" src={logo}></Image>
-                                <Fade in={this.state.fadeIn} timeout={800}>
+                                <div className="initialMessage--text">
                                     <h2>{this.state.initialMessage}</h2>
-                                </Fade>
+                                </div>
                             </div>
                     </div>
                 </div>

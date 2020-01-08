@@ -8,7 +8,7 @@ import { register } from '../../API/userManager';
 //import './Login.css';
 
 class RegisterModal extends React.Component {
-    state = {                     
+    state = {
             firstName: "",
             lastName: "",
             email: "",
@@ -41,15 +41,15 @@ class RegisterModal extends React.Component {
             this.setState({ errors: err.messages });
             });
     }
-    
+
     handleInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({
         [name]: value,
-    });   
+    });
     }
 
-   
+
     //toggles modal
     toggle = () => {
         this.setState(prevState => ({
@@ -60,34 +60,34 @@ class RegisterModal extends React.Component {
 
     constructFirstBook = () => {
 
-        const firstBook = {                
+        const firstBook = {
             title: "quotebook",
-            description: "we have created a quotebook for you, with inspiration for each day of the year.",                           
+            description: "we have created a quotebook for you, with inspiration for each day of the year.",
             startsBlank: false
         }
-        BookManager.postBook(firstBook)       
+        BookManager.postBook(firstBook)
     }
 
 
     render() {
         return (
-            <div>
+            <div className="auth">
                 <div className="registerbtn">
                     <Button onClick={this.toggle}>sign up</Button>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <form onSubmit={this.submit}>                   
+                <form onSubmit={this.submit}>
                     <ModalHeader toggle={this.toggle}>Sign up</ModalHeader>
-                    <ModalBody>    
+                    <ModalBody>
                     <ul>
                         {
                             this.state.errors ? this.state.errors.map((message, i) => (
                             <li key={i}>{message}</li>
                             )) : null
                         }
-                    </ul>                    
+                    </ul>
                         <div>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="text"
                                     id="firstName"
                                     name="firstName"
@@ -95,7 +95,7 @@ class RegisterModal extends React.Component {
                                     value={this.state.firstName}
                                     required
                                 /><br/>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="text"
                                     id="lastName"
                                     name="lastName"
@@ -103,7 +103,7 @@ class RegisterModal extends React.Component {
                                     value={this.state.lastName}
                                     required
                                     /><br/>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="email"
                                     name="email"
                                     id="email"
@@ -112,7 +112,7 @@ class RegisterModal extends React.Component {
                                     required
                                     autoFocus=""
                                     /><br/>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="text"
                                     id="username"
                                     name="username"
@@ -120,7 +120,7 @@ class RegisterModal extends React.Component {
                                     value={this.state.username}
                                     required
                                     /><br/>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="password"
                                     id="password"
                                     name="password"
@@ -128,14 +128,14 @@ class RegisterModal extends React.Component {
                                     value={this.state.password}
                                     required
                                     /><br/>
-                            <Input onChange={this.handleInputChange} 
+                            <Input onChange={this.handleInputChange}
                                     type="password"
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     placeholder="confirm password"
                                     required
                                 />
-                        </div>                      
+                        </div>
                     </ModalBody>
                     <ModalFooter>
                         <Button

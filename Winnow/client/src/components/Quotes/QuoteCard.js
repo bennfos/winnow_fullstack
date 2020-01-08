@@ -4,8 +4,8 @@ import EditQuoteModal from '../Quotes/EditQuoteModal'
 import ConfirmDeleteQuoteModal from './ConfirmDeleteQuoteModal';
 import { Transition } from 'semantic-ui-react'
 import { Fade } from 'reactstrap'
-//import '../Books/Card.css'
-//import './Quotes.css'
+import '../Styles/Pages.css'
+
 
 
 class QuoteCard extends Component {
