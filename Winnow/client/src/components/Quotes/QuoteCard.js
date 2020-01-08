@@ -55,23 +55,21 @@ class QuoteCard extends Component {
     return (
         <>
             <Fade in={this.state.fadeIn} timeout={600}>
-                <div
-                    className="quoteCard__container"
-                    onClick={this.toggle}>
-
-                        <div
-                            className="quoteCard__contents"
-                        >
-                                <h3>{this.props.quote.quoteText}</h3>
-                                <h5 className="author">{this.props.quote.quoteAuthor}</h5>
-                        </div>
+                <div className="quoteCard__container" onClick={this.toggle}>
+                    <div className="quoteCard__contents">
+                        <h3>{this.props.quote.quoteText}</h3>
+                        <h5 className="author">{this.props.quote.quoteAuthor}</h5>
+                    </div>
                     <Transition animation="horizontal flip" visible={this.state.visible}>
                         <div className="editAndDelete">
-                            <ConfirmDeleteQuoteModal
-                                {...this.props}
-                                />
-                            <EditQuoteModal
-                                {...this.props}/>
+                            <div className="delete">
+                                <ConfirmDeleteQuoteModal
+                                    {...this.props}/>
+                            </div>
+                            <div className="edit">
+                                <EditQuoteModal
+                                    {...this.props}/>
+                            </div>
                         </div>
                     </Transition>
                 </div>

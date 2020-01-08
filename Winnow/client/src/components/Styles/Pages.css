@@ -3,12 +3,16 @@
     justify-content: center;
     flex-direction: column;
     margin: 15px 30px;
+
 }
 
 .dayInt__button {
     margin: 10px;
-    min-width: 40px;
-    min-height: 40px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
 }
 
 .sidebar__menu {
@@ -33,7 +37,6 @@
 .quoteList__contents {
     display: flex;
     flex-direction: column;
-    margin: 0 8%;
 }
 
 .quoteList__header {
@@ -97,6 +100,9 @@
 
 .quoteCard__container {
     margin: 20px 0;
+    display: flex;
+    flex-direction:row;
+    position: relative
 }
 
 .logo {
@@ -106,4 +112,18 @@
 
 .thoughtImage {
     align-self: center;
+}
+
+
+
+.delete {
+    top: 0;
+ right: 0;
+ margin: 2px;
+}
+
+.edit {
+    top:12px;
+    right: 0;
+    margin: 2px;
 }

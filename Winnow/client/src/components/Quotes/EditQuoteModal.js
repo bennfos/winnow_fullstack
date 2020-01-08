@@ -7,9 +7,9 @@ import QuoteManager from '../../API/QuoteManager'
 class EditQuoteModal extends Component {
 
 //Defines initial state
-    state = {      
+    state = {
         quoteText: "",
-        quoteAuthor: "",       
+        quoteAuthor: "",
         loadingStatus: false,
         modal: false
     };
@@ -43,10 +43,10 @@ class EditQuoteModal extends Component {
 
         //creates a new object for the edited news item,
             const editedQuote = {
-                id: this.props.quote.id,               
+                id: this.props.quote.id,
                 pageId: this.props.quote.pageId,
                 quoteText: this.state.quoteText,
-                quoteAuthor: this.state.quoteAuthor,              
+                quoteAuthor: this.state.quoteAuthor,
             };
         //posts the object to the database (see PageMain)
             this.props.putEditedQuote(editedQuote, this.props.pageId)
@@ -62,7 +62,7 @@ class EditQuoteModal extends Component {
         .then(quote => {
             this.setState({
                 quoteText: quote.quoteText,
-                quoteAuthor: quote.quoteAuthor,                                       
+                quoteAuthor: quote.quoteAuthor,
             });
         });
     }
@@ -70,15 +70,11 @@ class EditQuoteModal extends Component {
     render(){
         return(
             <>
-                <section className="quoteSectionContent">
-                    <Icon
-                        type="button"
-                        onClick={this.toggle}
-                        name='edit outline'
-                        size="large">
-                    </Icon>
-                </section>
-
+                <Icon
+                    onClick={this.toggle}
+                    name='edit outline'
+                    size="large">
+                </Icon>
                 <div>
                     <Modal isOpen={this.state.modal} toggle={this.toggle}
                     className={this.props.className}
