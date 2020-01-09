@@ -30,6 +30,7 @@ export default class ApplicationViews extends Component {
             exact path="/books" render={props => {
                 if (this.isAuthenticated()) {
                 return <BookMain
+                    {...this.props}
                     {...props}
                     onLogin={(user) => this.setState({ user })}
                 />
@@ -44,6 +45,7 @@ export default class ApplicationViews extends Component {
                     if (this.isAuthenticated()) {
                     return <PageMain
                         bookId={parseInt(props.match.params.bookId)}
+                        {...this.props}
                         {...props}/>
                     }
                     return <Redirect to="/" />
@@ -58,10 +60,12 @@ export default class ApplicationViews extends Component {
 
           <Route
           exact path="/search" render={props => {
-              //if (this.isAuthenticated()) {
-              return <Search {...props} />
-              //}
-              //return <Redirect to="/" />
+              if (this.isAuthenticated()) {
+              return <Search
+                {...props}
+                />
+              }
+              return <Redirect to="/" />
           }}
           />
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Label, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import { Menu, Button, Grid, Container } from 'semantic-ui-react';
-//import '../Books/Card.css'
+import '../Styles/Pages.css'
 
 
 
@@ -11,7 +11,7 @@ class PageSelect extends Component {
     state = {
         days: [],
         modal: false,
-        focus: "hide"
+        focus: "hide",
     };
 
     //toggles modal
@@ -19,7 +19,11 @@ class PageSelect extends Component {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
-    }   
+    }
+
+
+
+
 
     pushDaysOfMonth = () => {
         const monthSelected = this.props.monthSelect
@@ -59,20 +63,19 @@ class PageSelect extends Component {
                         <Container className="calendar__container">
                             <Grid columns={7}>
                                 <Grid.Row centered>
-                                    <Label />{monthSelected}
+                                    <Label />{monthSelected} {this.props.day}
                                 </Grid.Row>
                                 <Grid.Row>
                                     {this.state.days.map(day => {
                                         return (
                                             <Grid.Column key={day}>
                                                 <Input
-
                                                     id="day"
                                                     type="button"
                                                     value={day.toString()}
                                                     className="dayInt__button "
                                                     onClick={this.props.handleFieldChange}
-                                                    onFocus={this.toggleDayFocus}
+
                                                 >
                                                 </Input>
                                             </Grid.Column>

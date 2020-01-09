@@ -6,12 +6,12 @@ import RegisterModal from "./RegisterModal"
 class Auth extends Component {
     render() {
         return (
-            <React.Fragment>
-                <div className="auth">
-                    <Login {...this.props}/>
-                    <RegisterModal className="registerbtn" {...this.props}/>
-                </div>
-            </React.Fragment>
+
+            <div className="auth">
+                <Login {...this.props}/>
+                <RegisterModal className="registerbtn" {...this.props}/>
+            </div>
+
         )
     }
 }

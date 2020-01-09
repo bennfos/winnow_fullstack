@@ -95,7 +95,13 @@ resetThoughtInStateIfNoThoughtInProps = () => {
     return (
 
         <div className={this.state.className}>
-            <Image className="logo" src={logo}></Image>
+            <Image
+              className="logo" src={logo}
+              onClick={()=> {
+                    this.toggle()
+                    this.resetThoughtInStateIfNoThoughtInProps()
+                }}>
+            </Image>
             <Card
                 className="thoughtCard--background"
                 body

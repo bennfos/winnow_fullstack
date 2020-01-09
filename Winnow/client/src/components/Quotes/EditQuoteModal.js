@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import { Button, Icon } from 'semantic-ui-react'
 import QuoteManager from '../../API/QuoteManager'
+import '../Styles/Pages.css'
 
 
 class EditQuoteModal extends Component {
 
 //Defines initial state
-    state = {      
+    state = {
         quoteText: "",
-        quoteAuthor: "",       
+        quoteAuthor: "",
         loadingStatus: false,
         modal: false
     };
@@ -43,10 +44,10 @@ class EditQuoteModal extends Component {
 
         //creates a new object for the edited news item,
             const editedQuote = {
-                id: this.props.quote.id,               
+                id: this.props.quote.id,
                 pageId: this.props.quote.pageId,
                 quoteText: this.state.quoteText,
-                quoteAuthor: this.state.quoteAuthor,              
+                quoteAuthor: this.state.quoteAuthor,
             };
         //posts the object to the database (see PageMain)
             this.props.putEditedQuote(editedQuote, this.props.pageId)
@@ -62,51 +63,50 @@ class EditQuoteModal extends Component {
         .then(quote => {
             this.setState({
                 quoteText: quote.quoteText,
-                quoteAuthor: quote.quoteAuthor,                                       
+                quoteAuthor: quote.quoteAuthor,
             });
         });
     }
 
     render(){
         return(
-            <>
-                <section className="quoteSectionContent">
-                    <Icon
-                        type="button"
-                        onClick={this.toggle}
-                        name='edit outline'
-                        size="large">
-                    </Icon>
-                </section>
+          <>
+            <div className="editWithPipe">
+              <Icon
+                  onClick={this.toggle}
+                  name='edit'
+                  size="large">
+              </Icon>
+              <h1>|</h1>
+            </div>
+            <div>
+                <Modal isOpen={this.state.modal} toggle={this.toggle}
+                className={this.props.className}
+                >
+                    <ModalHeader toggle={this.toggle}>edit quote</ModalHeader>
+                        <ModalBody>
 
-                <div>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}
-                    className={this.props.className}
-                    >
-                        <ModalHeader toggle={this.toggle}>edit quote</ModalHeader>
-                            <ModalBody>
+                            <div className="editBookForm">
+                                <Input onChange={this.handleFieldChange} type="textarea"
+                                    id="quoteText"
+                                    value={this.state.quoteText}
+                                    required
+                                    autoFocus=""
+                                /><br/>
+                                <Input onChange={this.handleFieldChange} type="text"
+                                    id="quoteAuthor"
+                                    value={this.state.quoteAuthor}
+                                    required
+                                /><br/>
+                            </div>
 
-                                <div className="editBookForm">
-                                    <Input onChange={this.handleFieldChange} type="textarea"
-                                        id="quoteText"
-                                        value={this.state.quoteText}
-                                        required
-                                        autoFocus=""
-                                    /><br/>
-                                    <Input onChange={this.handleFieldChange} type="text"
-                                        id="quoteAuthor"
-                                        value={this.state.quoteAuthor}
-                                        required
-                                    /><br/>
-                                </div>
-
-                            </ModalBody>
-                        <ModalFooter>
-                            <Button primary onClick={this.editExistingQuote}>save</Button>
-                            <Button onClick={this.toggle}>cancel</Button>
-                        </ModalFooter>
-                    </Modal>
-                </div>
+                        </ModalBody>
+                    <ModalFooter>
+                        <Button primary onClick={this.editExistingQuote}>save</Button>
+                        <Button onClick={this.toggle}>cancel</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
         </>
         )
     }

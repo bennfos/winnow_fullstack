@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EditBookModal from './EditBookModal.js'
-import { Button, Transition, Icon } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
+import { Fade } from 'reactstrap'
  import PageManager from '../../API/PageManager'
  import QuoteManager from '../../API/QuoteManager'
 import ConfirmBookDeleteModal from './ConfirmDeleteBookModal'
@@ -72,7 +73,7 @@ class BookCard extends Component {
     handleOpenBook = () => {
         if (this.state.day === "") {
             alert("please select a day");
-        } else {
+        } else if (this.props.editMode !== true) {
             this.setState({ loadingStatus: true });
 
         //check to see if the page already exists in the database
@@ -92,49 +93,50 @@ class BookCard extends Component {
         }
    }
 
+   componentDidMount () {
+    if (this.props.editMode == true) {
+      this.toggle()
+    }
+   }
+
+   componentDidUpdate(prevProps) {
+    if (this.props.editMode !== prevProps.editMode) {
+      this.toggle();
+    }
+  }
+
 
     toggle = () => {
-        this.setState(state => ({ visible: !state.visible }))
-        console.log(this.state.visible);
-      }
+      this.setState(prevState => ({
+          visible: !prevState.visible
+      }));
+  }
 
   render() {
+
     return (
 
-        <div className="bookCard">
-            <div className="options">
-                <div className="ellipses" >
-                    <Icon onClick={this.toggle} size="large" name="ellipsis horizontal"></Icon>
-                </div>
-                <Transition animation="horizontal flip" visible={this.state.visible}>
-                    <div className="delete">
-                        <ConfirmBookDeleteModal {...this.props}/>
-                    </div>
-                </Transition>
+      <div className="bookCard" onClick={this.handleOpenBook}>
+        <div className="bookCard__title" >
+          <h2>{this.props.book.title}</h2>
+        </div>
+        <div className="book__description">
+          <h4><em>{this.props.book.description}</em></h4>
+        </div>
+        <Fade in={this.state.visible}>
+          <div className="editAndDeleteBook">
+            <div className="editBook">
+              <EditBookModal
+                {...this.props}
+                putEditedBook={this.props.putEditedBook}
+              />
             </div>
-            <div className="bookCard__title" >
-                <h2>{this.props.book.title}</h2>
-                <div>
-                    <Button
-                        onClick={this.handleOpenBook}
-                        icon="chevron right"
-                        size="mini"
-                    >
-                    </Button>
-                </div>
+            <div className="deleteBook">
+              <ConfirmBookDeleteModal {...this.props}/>
             </div>
-            <div className="book__description">
-                <h4><em>{this.props.book.description}</em></h4>
-            </div>
-            <Transition animation="horizontal flip" visible={this.state.visible}>
-                <div className="edit">
-                    <EditBookModal
-                                {...this.props}
-                                putEditedBook={this.props.putEditedBook}
-                    />
-                </div>
-            </Transition>
-    </div>
+          </div>
+        </Fade>
+      </div>
 
     );
   }

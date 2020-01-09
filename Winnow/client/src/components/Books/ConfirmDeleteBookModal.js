@@ -5,9 +5,9 @@ import { Icon, Button } from 'semantic-ui-react'
 class ConfirmDeleteBookModal extends Component {
 
 //Defines initial state
-    
+
         state = {
-            books: [],          
+            books: [],
             title: "",
             description: "",
             timestamp: "",
@@ -29,7 +29,7 @@ class ConfirmDeleteBookModal extends Component {
                 <section>
                     <Icon
                         className="delete__icon"
-                        name="delete"
+                        name="trash alternate outline"
                         onClick={this.toggle}
                         size="large"
                     >

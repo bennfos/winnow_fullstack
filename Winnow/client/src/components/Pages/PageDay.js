@@ -21,14 +21,14 @@ class PageDay extends Component {
             <React.Fragment>
 
                 <div className="quoteList__container">
-                <Fade in={this.state.fadeIn} timeout={600}>
+                <Fade in={this.state.fadeIn}>
                     <div>
                         <QuoteList
                             {...this.props}
                         />
                     </div>
                 </Fade>
-                <Fade in={this.state.fadeIn} timeout={600}>
+                <Fade in={this.state.fadeIn}>
                     <div className="thoughtList">
 
                         <ThoughtList

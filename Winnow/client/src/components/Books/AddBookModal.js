@@ -12,8 +12,9 @@ class AddBookModal extends Component {
         title: "",
         description: "",
         timestamp: "",
-        modal: false
-    };
+        modal: false,
+      };
+
 
 
 //Displays/hides the modal
@@ -54,6 +55,8 @@ class AddBookModal extends Component {
     };
 
 
+
+
     // clearDescriptionInState = () => {
     //     this.setState({
     //         description: ""
@@ -61,55 +64,56 @@ class AddBookModal extends Component {
     // }
 
     render(){
+
         return(
             <>
                 <div onClick={() => this.toggle()}>
                     <div className="addCard__content">
-                        <div
-                            className="add__icon"
-                            onClick={() => this.toggle}
-                        >
-                            <Icon
-                                onClick={() => this.toggle}
-                                className="addBookModal__button"
-                                name="add"
-                                >
-                            </Icon>
-                        </div>
+                      <div
+                        className="add__icon"
+                        onClick={() => this.toggle}
+                      >
+                        <Icon
+                          onClick={() => this.toggle}
+                          className="addBookModal__button"
+                          name="add"
+                          >
+                        </Icon>
+                      </div>
                     </div>
                 </div>
                 <div>
                     <Modal
-                        isOpen={this.state.modal}
-                        toggle={this.toggle}
-                        className={this.props.className}
+                      isOpen={this.state.modal}
+                      toggle={this.toggle}
+                      className={this.props.className}
+                      autoFocus={false}
                     >
                         <ModalHeader toggle={this.toggle}>add book</ModalHeader>
                         <ModalBody>
-                            <div className="newBookForm">
-                                <Input
-                                    onChange={this.handleFieldChange}
-                                    type="text"
-                                    id="title"
-                                    placeholder="title"
-                                    required
-                                    autoFocus=""
-                                    /><br/>
-                                <Input onChange={this.handleFieldChange}
-                                    type="textarea"
-                                    id="description"
-                                    placeholder="description"
-                                    /><br/>
-                            </div>
-
+                          <div className="newBookForm">
+                            <Input
+                              onChange={this.handleFieldChange}
+                              type="text"
+                              id="title"
+                              placeholder="title"
+                              required
+                              autoFocus={true}
+                              /><br/>
+                            <Input onChange={this.handleFieldChange}
+                              type="textarea"
+                              id="description"
+                              placeholder="description"
+                              /><br/>
+                          </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button primary onClick={() => {
-                                    this.constructNewBook()
-                                    //this.clearDescriptionInState()
-                            }}
-                            >save</Button>
-                            <Button onClick={this.toggle}>cancel</Button>
+                          <Button primary onClick={() => {
+                            this.constructNewBook()
+                            //this.clearDescriptionInState()
+                          }}
+                          >save</Button>
+                          <Button onClick={this.toggle}>cancel</Button>
                         </ModalFooter>
                     </Modal>
                 </div>

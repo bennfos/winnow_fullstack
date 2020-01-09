@@ -13,9 +13,8 @@ class Search extends Component {
             quotes: [],
             searchInput: "",
             searchResults: [],
-            initialMessage: "",
+            initialMessage: "search and you shall find",
             loadingStatus: true,
-            fadeIn: true
         }
 
 
@@ -26,7 +25,7 @@ class Search extends Component {
     }
 
     searchPageQuotes = () => {
-        //4. Filter the quotes to include only those object whose quoteText, quoteAuthor or month include the search input value
+        //4. Filter the quotes to include only those objects whose quoteText, quoteAuthor or month include the search input value
         this.setState({initialMessage: ""})
         const searchResults = this.state.quotes.filter(quote =>
                 quote.quoteText.toLowerCase().includes(this.state.searchInput.toLowerCase())
@@ -39,11 +38,10 @@ class Search extends Component {
     }
 
     componentDidMount () {
-        QuoteManager.getQuotes(this.state.searchInput)
+        QuoteManager.getQuotes()
             .then(quotes => {
                 this.setState({
                     quotes: quotes,
-                    initialMessage: "search and you shall find",
                     loadingStatus: false
                 })
             })
@@ -75,12 +73,12 @@ class Search extends Component {
                             searchResult={searchResult}
                             {...this.props}/>
                         ))}
-                            <div className="initialMessage">
-                                <Image className="logo" src={logo}></Image>
-                                <Fade in={this.state.fadeIn} timeout={800}>
-                                    <h2>{this.state.initialMessage}</h2>
-                                </Fade>
-                            </div>
+                          <div className="initialMessage">
+                              <Image className="logo" src={logo}></Image>
+                              <div className="initialMessage--text">
+                                  <h2>{this.state.initialMessage}</h2>
+                              </div>
+                          </div>
                     </div>
                 </div>
             </React.Fragment>
@@ -89,3 +87,4 @@ class Search extends Component {
 }
 
 export default Search;
+

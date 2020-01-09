@@ -6,9 +6,9 @@ import { Icon, Button } from 'semantic-ui-react'
 class AddQuoteModal extends Component {
 
 //Defines initial state
-    state = {        
+    state = {
         quoteText: "",
-        quoteAuthor: "",          
+        quoteAuthor: "",
         modal: false,
         loadingStatus: false
     };
@@ -37,12 +37,12 @@ class AddQuoteModal extends Component {
             this.setState({ loadingStatus: true });
 
             console.log(this.props.pageId)
-            
+
         //creates a new object for the quote that is to be added,
             const newQuote = {
-                pageId: this.props.pageId,                      
+                pageId: this.props.pageId,
                 quoteText: this.state.quoteText,
-                quoteAuthor: this.state.quoteAuthor,         
+                quoteAuthor: this.state.quoteAuthor,
             };
             console.log(newQuote);
         //posts the object to the database, gets all pageQuotes, and rerenders (see PageMain)
@@ -69,35 +69,31 @@ class AddQuoteModal extends Component {
             <>
                 <section className="addQuote__button">
                     <Icon
-                    onClick={this.toggle}
-                    
-                    name="add">
+                      onClick={this.toggle}
+                      name="add">
                     </Icon>
                 </section>
                 <div>
                     <Modal
+                        autoFocus={false}
                         isOpen={this.state.modal}
                         toggle={this.toggle}
                         className={this.props.className}
                     >
                         <ModalHeader toggle={this.toggle}>add quote</ModalHeader>
                         <ModalBody>
-
-
-                                    <Input onChange={this.handleFieldChange}
-                                            type="textarea"
-                                            id="quoteText"
-                                            placeholder="text"
-                                            required
-                                            autoFocus=""
-                                        /><br/>
-                                    <Input onChange={this.handleFieldChange}
-                                            type="text"
-                                            id="quoteAuthor"
-                                            placeholder="author"
-                                        /><br/>
-
-
+                          <Input onChange={this.handleFieldChange}
+                                  type="textarea"
+                                  id="quoteText"
+                                  placeholder="text"
+                                  required
+                                  autoFocus={true}
+                              /><br/>
+                          <Input onChange={this.handleFieldChange}
+                                  type="text"
+                                  id="quoteAuthor"
+                                  placeholder="author"
+                              /><br/>
                         </ModalBody>
                         <ModalFooter>
                             <Button

@@ -53,6 +53,7 @@ class PageMain extends Component {
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
         this.setState(stateToChange);
+        console.log(this.state.day)
     };
 
     navigateToPage = (page) => {
@@ -75,6 +76,7 @@ class PageMain extends Component {
             day: this.state.day,
             thought: ""
         };
+        console.log("constructed: ", newPage)
         //post the page object to the database, THEN set state with that page's id, and push user to that page's view
         PageManager.postPage(newPage)
         .then(page => {
@@ -100,6 +102,7 @@ class PageMain extends Component {
                         .then(quote => {
                             console.log("random quote posted:", quote.quoteText)
                             this.props.history.push(`/books/${this.props.bookId}/${this.state.pageId}/${this.state.month}/${this.state.day}`)
+
                             this.toggle()
                             this.toggleSidebar()
                         })
@@ -128,12 +131,15 @@ class PageMain extends Component {
 
                     //THEN, if it does exist, set state with that page's info, and push user to that page's view
                     if (page.id !== 0) {
+                        console.log("navigating to ", this.state.day)
                         this.navigateToPage(page)
                     } else {
+                        console.log("about to construct page ", this.state.month, this.state.day)
                     //else, if the page does not exist yet, construct an object for that page
                         this.constructNewPage()
                     }
                 })
+
         }
 
     }
@@ -275,6 +281,7 @@ class PageMain extends Component {
                         handleFieldChange={this.handleFieldChange}
                         handlePageSelect={this.handlePageSelect}
                         monthSelect={monthSelect}
+                        day={this.state.day}
                         {...this.props}
                     />
                 ))}
