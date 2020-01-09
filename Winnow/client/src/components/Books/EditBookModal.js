@@ -67,42 +67,40 @@ class BookEditModal extends Component {
     render(){
         return(
             <>
-
+              <div className="editWithPipe">
                 <Icon
-
-                    onClick={this.toggle}
-                    name='edit outline'
-                    size="large"
-                >
+                  onClick={this.toggle}
+                  name='edit outline'
+                  size='large'>
                 </Icon>
-
-                <div>
-                <Modal isOpen={this.state.modal} toggle={this.toggle}
-                className={this.props.className}
+                <h1>|</h1>
+              </div>
+              <div>
+              <Modal isOpen={this.state.modal} toggle={this.toggle}
+              className={this.props.className}
             >
-                    <ModalHeader toggle={this.toggle}>edit book</ModalHeader>
-                    <ModalBody>
+                <ModalHeader toggle={this.toggle}>edit book</ModalHeader>
+                  <ModalBody>
 
-                                <div className="editBookForm">
-                                    <Input
+                    <div className="editBookForm">
+                      <Input
 
-                                        onChange={this.handleFieldChange}
-                                        type="text"
-                                        id="title"
-                                        value={this.state.title}
-                                        required
-                                        autoFocus=""
-                                    /><br/>
-                                    <Input
-                                        onChange={this.handleFieldChange}
-                                        type="textarea"
-                                        id="description"
-                                        value={this.state.description}
-                                        required
-                                    /><br/>
-                                </div>
+                        onChange={this.handleFieldChange}
+                        type="text"
+                        id="title"
+                        value={this.state.title}
+                        required
+                      /><br/>
+                      <Input
+                          onChange={this.handleFieldChange}
+                          type="textarea"
+                          id="description"
+                          value={this.state.description}
+                          required
+                      /><br/>
+                    </div>
 
-                    </ModalBody>
+                  </ModalBody>
                 <ModalFooter>
                     <Button primary type="button" onClick={this.editBook}>save</Button>{' '}
                     <Button type="button" onClick={this.toggle}>cancel</Button>

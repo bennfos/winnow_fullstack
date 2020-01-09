@@ -29,7 +29,7 @@ namespace Capstone.Controllers.V1
             if (pageId != null)
             {
                 return await _context.Quotes
-               .Where(q => q.PageId == pageId)
+               .Where(q => q.PageId == pageId)               
                .ToListAsync();
             }         
 

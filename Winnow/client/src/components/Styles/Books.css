@@ -24,6 +24,9 @@ align-content: center;
 }
 
 .bookCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fdfefe;
     min-width: 260px;
     max-width: 260px;
@@ -41,16 +44,16 @@ align-content: center;
     justify-content: space-evenly;
 }
 
-.delete {
-    margin: 8px;
-    float: right;
+.editAndDeleteBook {
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-end;
+  margin: 40px 0 0 0;
 }
 
-.edit {
-    margin: 8px;
-    position: absolute;
-    top: 0;
-    right: 15px;
+.deleteBook {
+  align-self: center;
+  justify-self: center;
 }
 
 .ellipses {

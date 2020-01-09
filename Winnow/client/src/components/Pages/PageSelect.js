@@ -12,7 +12,6 @@ class PageSelect extends Component {
         days: [],
         modal: false,
         focus: "hide",
-        day: ""
     };
 
     //toggles modal
@@ -22,11 +21,8 @@ class PageSelect extends Component {
         }));
     }
 
-    setDayInState = (day) => {
-    this.setState({
-        day: day
-    })
-}
+
+
 
 
     pushDaysOfMonth = () => {
@@ -67,7 +63,7 @@ class PageSelect extends Component {
                         <Container className="calendar__container">
                             <Grid columns={7}>
                                 <Grid.Row centered>
-                                    <Label />{monthSelected} {this.state.day}
+                                    <Label />{monthSelected} {this.props.day}
                                 </Grid.Row>
                                 <Grid.Row>
                                     {this.state.days.map(day => {
@@ -79,7 +75,7 @@ class PageSelect extends Component {
                                                     value={day.toString()}
                                                     className="dayInt__button "
                                                     onClick={this.props.handleFieldChange}
-                                                    onFocus={() => this.setDayInState(day)}
+
                                                 >
                                                 </Input>
                                             </Grid.Column>

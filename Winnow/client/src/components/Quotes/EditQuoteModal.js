@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
 import { Button, Icon } from 'semantic-ui-react'
 import QuoteManager from '../../API/QuoteManager'
+import '../Styles/Pages.css'
 
 
 class EditQuoteModal extends Component {
@@ -69,40 +70,43 @@ class EditQuoteModal extends Component {
 
     render(){
         return(
-            <>
-                <Icon
-                    onClick={this.toggle}
-                    name='edit outline'
-                    size="large">
-                </Icon>
-                <div>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}
-                    className={this.props.className}
-                    >
-                        <ModalHeader toggle={this.toggle}>edit quote</ModalHeader>
-                            <ModalBody>
+          <>
+            <div className="editWithPipe">
+              <Icon
+                  onClick={this.toggle}
+                  name='edit'
+                  size="large">
+              </Icon>
+              <h1>|</h1>
+            </div>
+            <div>
+                <Modal isOpen={this.state.modal} toggle={this.toggle}
+                className={this.props.className}
+                >
+                    <ModalHeader toggle={this.toggle}>edit quote</ModalHeader>
+                        <ModalBody>
 
-                                <div className="editBookForm">
-                                    <Input onChange={this.handleFieldChange} type="textarea"
-                                        id="quoteText"
-                                        value={this.state.quoteText}
-                                        required
-                                        autoFocus=""
-                                    /><br/>
-                                    <Input onChange={this.handleFieldChange} type="text"
-                                        id="quoteAuthor"
-                                        value={this.state.quoteAuthor}
-                                        required
-                                    /><br/>
-                                </div>
+                            <div className="editBookForm">
+                                <Input onChange={this.handleFieldChange} type="textarea"
+                                    id="quoteText"
+                                    value={this.state.quoteText}
+                                    required
+                                    autoFocus=""
+                                /><br/>
+                                <Input onChange={this.handleFieldChange} type="text"
+                                    id="quoteAuthor"
+                                    value={this.state.quoteAuthor}
+                                    required
+                                /><br/>
+                            </div>
 
-                            </ModalBody>
-                        <ModalFooter>
-                            <Button primary onClick={this.editExistingQuote}>save</Button>
-                            <Button onClick={this.toggle}>cancel</Button>
-                        </ModalFooter>
-                    </Modal>
-                </div>
+                        </ModalBody>
+                    <ModalFooter>
+                        <Button primary onClick={this.editExistingQuote}>save</Button>
+                        <Button onClick={this.toggle}>cancel</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
         </>
         )
     }

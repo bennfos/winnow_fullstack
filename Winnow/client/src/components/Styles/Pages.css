@@ -29,6 +29,22 @@
 
 }
 
+.delete {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.editWithPipe {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+h1 {
+  align-self: center;
+}
+
 .sidebar {
     height: 20px;
     padding: 45px 0 0 0;
@@ -96,13 +112,14 @@
 .quoteCard__contents {
     display: flex;
     flex-direction: column;
+
 }
 
 .quoteCard__container {
     margin: 20px 0;
     display: flex;
-    flex-direction:row;
-    position: relative
+    flex-direction:column;
+    justify-content: center;
 }
 
 .logo {
@@ -116,14 +133,8 @@
 
 
 
-.delete {
-    top: 0;
- right: 0;
- margin: 2px;
+.editAndDelete {
+  display: flex;
+  justify-content: center;
 }
 
-.edit {
-    top:12px;
-    right: 0;
-    margin: 2px;
-}

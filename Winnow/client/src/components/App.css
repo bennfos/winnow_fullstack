@@ -3,6 +3,10 @@
   margin: 0 0 15px 0;
 }
 
+.logout {
+  color: rgb(194, 0, 0) !important;
+}
+
 .header {
   background-color: #282c34;
   display: flex;

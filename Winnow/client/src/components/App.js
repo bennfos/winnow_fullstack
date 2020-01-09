@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { Redirect, Link, BrowserRouter as Router, Route } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Dropdown, Button } from 'semantic-ui-react'
 import { getUser, removeUser } from '../API/userManager';
 import './App.css';
 import ApplicationViews from "./ApplicationViews"
 
+
 class App extends Component {
   state = {
     user: getUser(),
+    editMode: false
+  }
+
+  toggleEditMode = () => {
+    this.setState(state => ({ editMode: !state.editMode }))
   }
 
   logout = () => {
@@ -19,8 +25,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="appViews">
-              <ApplicationViews 
-               
+              <ApplicationViews
+               editMode={this.state.editMode}
               />
         </div>
         <div className="nav__container">
@@ -59,14 +65,24 @@ class App extends Component {
                 </Menu.Item>
 
 
-                <Menu.Item
-                  as={Link}
-                  to='/'
-                  onClick={this.logout}
+                <Dropdown item
                   className="sidebarButton"
-                  icon="log out"
+                  icon="setting"
                 >
-                </Menu.Item>
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                        onClick={this.toggleEditMode}
+                        >edit mode
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        className="logout"
+                        as={Link}
+                        to='/'
+                        onClick={this.logout}
+                        >logout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
             </Menu>
         </div>
       </div>

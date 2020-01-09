@@ -10,6 +10,7 @@ body {
   background-size: cover;
   min-height: 100vh;
   color:rgb(85, 85, 85);
+  font-size: 16px;
 }
 
 code {
@@ -31,7 +32,10 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"],
+input[type="textarea"],
 select:focus,
-textarea {
+textarea
+{
   font-size: 16px;
 }
+

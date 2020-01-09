@@ -281,6 +281,7 @@ class PageMain extends Component {
                         handleFieldChange={this.handleFieldChange}
                         handlePageSelect={this.handlePageSelect}
                         monthSelect={monthSelect}
+                        day={this.state.day}
                         {...this.props}
                     />
                 ))}

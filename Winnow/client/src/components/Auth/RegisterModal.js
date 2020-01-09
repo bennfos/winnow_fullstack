@@ -75,7 +75,7 @@ class RegisterModal extends React.Component {
                 <div className="registerbtn">
                     <Button onClick={this.toggle}>sign up</Button>
                 </div>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal autoFocus={false} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <form onSubmit={this.submit}>
                     <ModalHeader toggle={this.toggle}>Sign up</ModalHeader>
                     <ModalBody>
@@ -94,6 +94,7 @@ class RegisterModal extends React.Component {
                                     placeholder="first name"
                                     value={this.state.firstName}
                                     required
+                                    autoFocus={true}
                                 /><br/>
                             <Input onChange={this.handleInputChange}
                                     type="text"
@@ -143,7 +144,6 @@ class RegisterModal extends React.Component {
                             primary
                             onClick={this.handleRegister}
                             >Sign up</Button>
-
                         <Button onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                     </form>

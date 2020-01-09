@@ -16,7 +16,7 @@ namespace Capstone.Models.DataModels
         [MaxLength(140)]
         public string Title{ get; set; }
 
-        [MinLength(1)]
+        
         [MaxLength(550)]
         public string Description { get; set; }
 
