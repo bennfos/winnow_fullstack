@@ -22,7 +22,7 @@ class Login extends Component {
         })
           .then((user) => {
             this.props.onLogin(user);
-            this.props.history.push('/books');
+            this.props.history.push('/quote');
           })
           .catch(err => {
             this.setState({ errors: err.messages });
