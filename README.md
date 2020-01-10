@@ -4,13 +4,13 @@ Most of us have an idea of what we believe concerning the fundamental questions 
 
 ## Technologies Used
 
-React
-ASP.NET Core API
-PostgreSQL
-Fetch JSONP (https://github.com/camsong/fetch-jsonp)
-Forismatic API (https://forismatic.com/en/api/)
-Reactstrap
-Semantic UI React
+1. React
+1. ASP.NET Core API
+1. PostgreSQL
+1. Fetch JSONP (https://github.com/camsong/fetch-jsonp)
+1. Forismatic API (https://forismatic.com/en/api/)
+1. Reactstrap
+1. Semantic UI React
 
 ## How to launch
 
