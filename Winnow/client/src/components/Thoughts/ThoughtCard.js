@@ -114,6 +114,7 @@ resetThoughtInStateIfNoThoughtInProps = () => {
                     <Modal
                         isOpen={this.state.modal}
                         toggle={this.toggle}
+                        autoFocus={false}
                     >
                         <ModalHeader toggle={this.toggle}>thought</ModalHeader>
                         <ModalBody>
@@ -122,7 +123,7 @@ resetThoughtInStateIfNoThoughtInProps = () => {
                                     id="thought"
                                     placeholder="add thought"
                                     required
-                                    autoFocus=""
+                                    autoFocus={true}
                                     value={this.state.thought}
                             ></Input>
                         </ModalBody>
