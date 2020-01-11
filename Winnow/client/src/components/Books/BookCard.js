@@ -107,6 +107,7 @@ class BookCard extends Component {
 
 
     toggle = () => {
+
       this.setState(prevState => ({
           visible: !prevState.visible
       }));

@@ -13,9 +13,12 @@ class ConfirmDeleteQuoteModal extends Component {
 
 //Displays/hides the new article modal
     toggle = () => {
+      if (this.props.editMode === true) {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
+
+      }
     }
 
 

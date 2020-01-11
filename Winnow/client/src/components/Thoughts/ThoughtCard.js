@@ -114,6 +114,7 @@ resetThoughtInStateIfNoThoughtInProps = () => {
                     <Modal
                         isOpen={this.state.modal}
                         toggle={this.toggle}
+                        autoFocus={false}
                     >
                         <ModalHeader toggle={this.toggle}>thought</ModalHeader>
                         <ModalBody>
@@ -122,7 +123,7 @@ resetThoughtInStateIfNoThoughtInProps = () => {
                                     id="thought"
                                     placeholder="add thought"
                                     required
-                                    autoFocus=""
+                                    autoFocus={true}
                                     value={this.state.thought}
                             ></Input>
                         </ModalBody>
@@ -131,15 +132,20 @@ resetThoughtInStateIfNoThoughtInProps = () => {
                                 primary
                                 onClick={ () => {
                                     this.constructOrEditThought()
-                                }
-                                }>save</Button>
-                            <ConfirmDeleteThoughtModal
-                                {...this.props}
-                                toggle={this.toggle}
-                            />
+                                }}>save
+                            </Button>
+
+                          {/* render delete button only if thought already exists */}
+                            {this.props.thought !== "" ?
+                              <ConfirmDeleteThoughtModal
+                              {...this.props}
+                              toggle={this.toggle}
+                          /> : null}
+
                             <Button
                                 onClick={this.toggle}
-                                >cancel</Button>
+                                >cancel
+                            </Button>
                         </ModalFooter>
                     </Modal>
                 </div>

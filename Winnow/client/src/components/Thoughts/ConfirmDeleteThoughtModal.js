@@ -7,7 +7,7 @@ class ConfirmDeleteThoughtModal extends Component {
 //Defines initial state
     state = {
             quoteAuthor: "",
-            quoteText: "",          
+            quoteText: "",
             modal: false
         };
 
@@ -21,7 +21,7 @@ class ConfirmDeleteThoughtModal extends Component {
 //edits page so that thought is removed, and puts edited page in database (see PageMain)
     removeThought = () => {
         const pageWithThought = {
-            id: this.props.pageId,           
+            id: this.props.pageId,
             bookId: this.props.bookId,
             month: this.props.month,
             day: this.props.day,
@@ -40,7 +40,7 @@ class ConfirmDeleteThoughtModal extends Component {
                         className="delete__icon"
                         name="delete"
                         onClick={this.toggle}
-                        size="small"
+
                     >delete
                     </Button>
                 </section>

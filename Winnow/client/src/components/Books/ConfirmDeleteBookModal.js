@@ -17,9 +17,11 @@ class ConfirmDeleteBookModal extends Component {
 
 //Displays/hides the new article modal
     toggle = () => {
+      if (this.props.editMode === true) {
         this.setState(prevState => ({
-            modal: !prevState.modal
+          modal: !prevState.modal
         }));
+      }
     }
 
 

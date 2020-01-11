@@ -19,9 +19,11 @@ class EditQuoteModal extends Component {
 
 //Displays/hides the edit modal
     toggle = () => {
+      if (this.props.editMode === true) {
         this.setState(prevState => ({
-            modal: !prevState.modal
+          modal: !prevState.modal
         }));
+      }
     }
 
 //Sets state with input values as fields change
