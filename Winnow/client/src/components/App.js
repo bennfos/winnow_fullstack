@@ -75,7 +75,7 @@ class App extends Component {
                         >edit mode
                     </Dropdown.Item>
                     <Dropdown.Item
-                        className="logout"
+                        className="logout red"
                         as={Link}
                         to='/'
                         onClick={this.logout}

@@ -16,11 +16,14 @@ class BookEditModal extends Component {
     };
 
 //Displays/hides the edit modal
-    toggle = () => {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
+  toggle = () => {
+    if (this.props.editMode === true) {
+      this.setState(prevState => ({
+          modal: !prevState.modal
+      }));
     }
+  }
+
 
 //Sets state with input values as fields change
     handleFieldChange = evt => {
@@ -76,7 +79,7 @@ class BookEditModal extends Component {
                 <h1>|</h1>
               </div>
               <div>
-              <Modal isOpen={this.state.modal} toggle={this.toggle}
+              <Modal isOpen={this.state.modal} toggle={this.showModal}
               className={this.props.className}
             >
                 <ModalHeader toggle={this.toggle}>edit book</ModalHeader>
