@@ -6,6 +6,8 @@ Most of us have an idea of what we believe concerning the fundamental questions 
 
 1. React
 1. ASP.NET Core API
+1. Entity Framework
+1. Identity Framework for authentication
 1. PostgreSQL
 1. Fetch JSONP (https://github.com/camsong/fetch-jsonp)
 1. Forismatic API (https://forismatic.com/en/api/)
@@ -14,4 +16,5 @@ Most of us have an idea of what we believe concerning the fundamental questions 
 
 ## How to launch
 
-Coming soon!
+For prospective employers:
+  During normal business hours visit bit.ly/winnow_fs
