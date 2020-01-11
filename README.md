@@ -16,5 +16,4 @@ Most of us have an idea of what we believe concerning the fundamental questions 
 
 ## How to launch
 
-For prospective employers:
   During normal business hours visit bit.ly/winnow_fs
