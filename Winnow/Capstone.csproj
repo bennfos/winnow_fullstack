@@ -36,5 +36,6 @@
     <None Remove="DockerFile.txt" />
     <None Remove="DockerFile" />
     <None Remove="Dockerfile" />
+    <None Remove=".dockerignore" />
   </ItemGroup>
 </Project>
