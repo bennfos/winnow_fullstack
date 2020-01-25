@@ -1,7 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import { Icon, Button } from 'semantic-ui-react'
 import BookDataManager from '../../API/BookManager'
+
+const bookEditModal = () => {
+
+
+
+  const handleTitleInput = e => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptiongitInput = e => {
+    setTitle(e.target.value);
+  };
+
+}
+
 
 class BookEditModal extends Component {
 
